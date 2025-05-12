@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block title %}Portfolio{% endblock %}
+
+{% block content %}
+            
+            <!-- Page Header Start -->
+            <div class="page-header">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-12">
+                            <h2>Our Projects</h2>
+                        </div>
+                        <div class="col-12">
+                            <a href="">Home</a>
+                            <a href="">Our Projects</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Page Header End -->
+
+
+            <!-- Portfolio Start -->
+<div class="portfolio">
+    <div class="container">
+        <div class="section-header">
+            <p>Our Project</p>
+            <h2>Visit Our Running Project</h2>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <ul id="portfolio-flters">
+                    <li data-filter="*" class="filter-active">All</li>
+                    <li data-filter=".completed">Completed</li>
+                    <li data-filter=".ongoing">Ongoing</li>
+                    <li data-filter=".upcoming">Upcoming</li>
+                </ul>
+            </div>
+        </div>
+        <div class="row portfolio-container">
+            {% for project in projects %}
+            <div class="col-lg-4 col-md-6 col-sm-12 portfolio-item {{ project.status }}">
+                <div class="portfolio-wrap">
+                    <figure>
+                        <img src="{{ project.image.url }}" alt="Portfolio Image">
+                        <a href="{{ project.image.url }}" class="link-preview" data-lightbox="portfolio"><i class="fa fa-eye"></i></a>
+                        {% if project.detail_url %}
+                        <a href="{{ project.detail_url }}" class="link-details"><i class="fa fa-link"></i></a>
+                        {% endif %}
+                        <a class="portfolio-title" href="#">{{ project.name }}</a>
+                    </figure>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        <div class="row">
+            <div class="col-12 load-more">
+                <a class="btn" href="#">Load More</a>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Portfolio End -->
+
+{% endblock %}
