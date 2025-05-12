@@ -46,13 +46,13 @@
         <div class="row">
             <div class="col-lg-5 col-md-6">
                 <div class="about-img">
-                    <img src="{% static 'img/about.jpg' %}" alt="Image">
+                    <img src="{{ about.image.url }}" alt="Image">
                 </div>
             </div>
             <div class="col-lg-7 col-md-6">
                 <div class="about-text">
-                    <h2><span>10</span> Years Experience</h2>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus nec pretium mi...</p>
+                    <h2><span>{{ about.experience_years }}</span> Years Experience</h2>
+                    <p>{{ about.description }}</p>
                     <a class="btn" href="">Learn More</a>
                 </div>
             </div>
@@ -69,38 +69,16 @@
             <h2>Provide Services Worldwide</h2>
         </div>
         <div class="row">
+            {% for service in services %}
             <div class="col-lg-3 col-md-6">
                 <div class="service-item">
-                    <img src="{% static 'img/service-1.jpg' %}" alt="Service">
-                    <h3>Flour Cleaning</h3>
-                    <p>Lorem ipsum dolor sit amet elit. Phasellus nec pretium mi. Curabitur facilisis ornare</p>
+                    <img src="{{ service.image.url }}" alt="Service">
+                    <h3>{{ service.title }}</h3>
+                    <p>{{ service.description }}</p>
                     <a class="btn" href="">Learn More</a>
                 </div>
             </div>
-            <div class="col-lg-3 col-md-6">
-                <div class="service-item">
-                    <img src="{% static 'img/service-2.jpg' %}" alt="Service">
-                    <h3>Glass Cleaning</h3>
-                    <p>Lorem ipsum dolor sit amet elit. Phasellus nec pretium mi. Curabitur facilisis ornare</p>
-                    <a class="btn" href="">Learn More</a>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-6">
-                <div class="service-item">
-                    <img src="{% static 'img/service-3.jpg' %}" alt="Service">
-                    <h3>Carpet Cleaning</h3>
-                    <p>Lorem ipsum dolor sit amet elit. Phasellus nec pretium mi. Curabitur facilisis ornare</p>
-                    <a class="btn" href="">Learn More</a>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-6">
-                <div class="service-item">
-                    <img src="{% static 'img/service-4.jpg' %}" alt="Service">
-                    <h3>Toilet Cleaning</h3>
-                    <p>Lorem ipsum dolor sit amet elit. Phasellus nec pretium mi. Curabitur facilisis ornare</p>
-                    <a class="btn" href="">Learn More</a>
-                </div>
-            </div>
+            {% endfor %}
         </div>
     </div>
 </div>
@@ -115,37 +93,21 @@
                     <p>Why Choose Us</p>
                     <h2>Expert Cleaners and World Class Services</h2>
                 </div>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus nec pretium mi...</p>
+                <p>{{ about.why_choose_us }}</p>
                 <a class="btn" href="">Learn More</a>
             </div>
             <div class="col-md-7">
+                {% for feature in features %}
                 <div class="row align-items-center feature-item">
                     <div class="col-5">
-                        <img src="{% static 'img/feature-1.jpg' %}" alt="Feature">
+                        <img src="{{ feature.image.url }}" alt="Feature">
                     </div>
                     <div class="col-7">
-                        <h3>Expert Cleaners</h3>
-                        <p>Lorem ipsum dolor sit amet elit. Phasellus nec pretium mi...</p>
+                        <h3>{{ feature.title }}</h3>
+                        <p>{{ feature.description }}</p>
                     </div>
                 </div>
-                <div class="row align-items-center feature-item">
-                    <div class="col-5">
-                        <img src="{% static 'img/feature-2.jpg' %}" alt="Feature">
-                    </div>
-                    <div class="col-7">
-                        <h3>Reasonable Prices</h3>
-                        <p>Lorem ipsum dolor sit amet elit. Phasellus nec pretium mi...</p>
-                    </div>
-                </div>
-                <div class="row align-items-center feature-item">
-                    <div class="col-5">
-                        <img src="{% static 'img/feature-3.jpg' %}" alt="Feature">
-                    </div>
-                    <div class="col-7">
-                        <h3>Quick & Best Services</h3>
-                        <p>Lorem ipsum dolor sit amet elit. Phasellus nec pretium mi...</p>
-                    </div>
-                </div>
+                {% endfor %}
             </div>
         </div>
     </div>
@@ -160,81 +122,31 @@
             <h2>Meet Our Expert Cleaners</h2>
         </div>
         <div class="row">
+            {% for member in team_members %}
             <div class="col-lg-3 col-md-6">
                 <div class="team-item">
                     <div class="team-img">
-                        <img src="{% static 'img/team-1.jpg' %}" alt="Team Image">
+                        <img src="{{ member.image.url }}" alt="{{ member.name }}">
                     </div>
                     <div class="team-text">
-                        <h2>Josh Dunn</h2>
-                        <h3>CEO</h3>
+                        <h2>{{ member.name }}</h2>
+                        <h3>{{ member.role }}</h3>
                         <div class="team-social">
-                            <a class="social-tw" href=""><i class="fab fa-twitter"></i></a>
-                            <a class="social-fb" href=""><i class="fab fa-facebook-f"></i></a>
-                            <a class="social-li" href=""><i class="fab fa-linkedin-in"></i></a>
-                            <a class="social-in" href=""><i class="fab fa-instagram"></i></a>
+                            {% if member.twitter %}<a class="social-tw" href="{{ member.twitter }}"><i class="fab fa-twitter"></i></a>{% endif %}
+                            {% if member.facebook %}<a class="social-fb" href="{{ member.facebook }}"><i class="fab fa-facebook-f"></i></a>{% endif %}
+                            {% if member.linkedin %}<a class="social-li" href="{{ member.linkedin }}"><i class="fab fa-linkedin-in"></i></a>{% endif %}
+                            {% if member.instagram %}<a class="social-in" href="{{ member.instagram }}"><i class="fab fa-instagram"></i></a>{% endif %}
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="col-lg-3 col-md-6">
-                <div class="team-item">
-                    <div class="team-img">
-                        <img src="{% static 'img/team-2.jpg' %}" alt="Team Image">
-                    </div>
-                    <div class="team-text">
-                        <h2>Mollie Ross</h2>
-                        <h3>Team Manager</h3>
-                        <div class="team-social">
-                            <a class="social-tw" href=""><i class="fab fa-twitter"></i></a>
-                            <a class="social-fb" href=""><i class="fab fa-facebook-f"></i></a>
-                            <a class="social-li" href=""><i class="fab fa-linkedin-in"></i></a>
-                            <a class="social-in" href=""><i class="fab fa-instagram"></i></a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-6">
-                <div class="team-item">
-                    <div class="team-img">
-                        <img src="{% static 'img/team-3.jpg' %}" alt="Team Image">
-                    </div>
-                    <div class="team-text">
-                        <h2>Dylan Adams</h2>
-                        <h3>Cleaner</h3>
-                        <div class="team-social">
-                            <a class="social-tw" href=""><i class="fab fa-twitter"></i></a>
-                            <a class="social-fb" href=""><i class="fab fa-facebook-f"></i></a>
-                            <a class="social-li" href=""><i class="fab fa-linkedin-in"></i></a>
-                            <a class="social-in" href=""><i class="fab fa-instagram"></i></a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-6">
-                <div class="team-item">
-                    <div class="team-img">
-                        <img src="{% static 'img/team-4.jpg' %}" alt="Team Image">
-                    </div>
-                    <div class="team-text">
-                        <h2>Jennifer Page</h2>
-                        <h3>Cleaner</h3>
-                        <div class="team-social">
-                            <a class="social-tw" href=""><i class="fab fa-twitter"></i></a>
-                            <a class="social-fb" href=""><i class="fab fa-facebook-f"></i></a>
-                            <a class="social-li" href=""><i class="fab fa-linkedin-in"></i></a>
-                            <a class="social-in" href=""><i class="fab fa-instagram"></i></a>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            {% endfor %}
         </div>
     </div>
 </div>
 <!-- Team End -->
 
-
- <!-- FAQs Start -->
+<!-- FAQs Start -->
 <div class="faqs">
     <div class="container">
         <div class="row">
@@ -247,68 +159,22 @@
             </div>
             <div class="col-md-7">
                 <div id="accordion">
+                    {% for faq in faqs %}
                     <div class="card">
                         <div class="card-header">
-                            <a class="card-link collapsed" data-toggle="collapse" href="#collapseOne" aria-expanded="true">
-                                <span>1</span> Lorem ipsum dolor sit amet?
+                            <a class="card-link {% if forloop.first %}collapsed{% endif %}" data-toggle="collapse" href="#collapse{{ forloop.counter }}" aria-expanded="{% if forloop.first %}true{% else %}false{% endif %}">
+                                <span>{{ forloop.counter }}</span> {{ faq.question }}
                             </a>
                         </div>
-                        <div id="collapseOne" class="collapse show" data-parent="#accordion">
+                        <div id="collapse{{ forloop.counter }}" class="collapse {% if forloop.first %}show{% endif %}" data-parent="#accordion">
                             <div class="card-body">
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus nec pretium mi. Curabitur facilisis ornare velit non.
+                                {{ faq.answer }}
                             </div>
                         </div>
                     </div>
-                    <div class="card">
-                        <div class="card-header">
-                            <a class="card-link" data-toggle="collapse" href="#collapseTwo">
-                                <span>2</span> Lorem ipsum dolor sit amet?
-                            </a>
-                        </div>
-                        <div id="collapseTwo" class="collapse" data-parent="#accordion">
-                            <div class="card-body">
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus nec pretium mi. Curabitur facilisis ornare velit non.
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card">
-                        <div class="card-header">
-                            <a class="card-link" data-toggle="collapse" href="#collapseThree">
-                                <span>3</span> Lorem ipsum dolor sit amet?
-                            </a>
-                        </div>
-                        <div id="collapseThree" class="collapse" data-parent="#accordion">
-                            <div class="card-body">
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus nec pretium mi. Curabitur facilisis ornare velit non.
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card">
-                        <div class="card-header">
-                            <a class="card-link" data-toggle="collapse" href="#collapseFour">
-                                <span>4</span> Lorem ipsum dolor sit amet?
-                            </a>
-                        </div>
-                        <div id="collapseFour" class="collapse" data-parent="#accordion">
-                            <div class="card-body">
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus nec pretium mi. Curabitur facilisis ornare velit non.
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card">
-                        <div class="card-header">
-                            <a class="card-link" data-toggle="collapse" href="#collapseFive">
-                                <span>5</span> Lorem ipsum dolor sit amet?
-                            </a>
-                        </div>
-                        <div id="collapseFive" class="collapse" data-parent="#accordion">
-                            <div class="card-body">
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus nec pretium mi. Curabitur facilisis ornare velit non.
-                            </div>
-                        </div>
-                    </div> 
+                    {% endfor %}
                 </div>
-                <a class="btn" href="">Ask more</a>
+                <a class="btn" href="{% url 'contact' %}">Ask more</a>
             </div>
         </div>
     </div>
@@ -323,27 +189,26 @@
             <h2>No Extra Hidden Charges</h2>
         </div>
         <div class="row">
+            {% for plan in pricing_plans %}
             <div class="col-md-4">
-                <div class="price-item">
+                <div class="price-item {% if plan.is_featured %}featured-item{% endif %}">
                     <div class="price-header">
                         <div class="price-icon">
-                            <i class="fa fa-home"></i>
+                            <i class="fa {{ plan.icon }}"></i>
                         </div>
                         <div class="price-title">
-                            <h2>Standard</h2>
+                            <h2>{{ plan.name }}</h2>
                         </div>
                         <div class="price-pricing">
-                            <h2><small>$</small>99</h2>
+                            <h2><small>$</small>{{ plan.price|floatformat:0 }}</h2>
                         </div>
                     </div>
                     <div class="price-body">
                         <div class="price-des">
                             <ul>
-                                <li>3 Bedrooms cleaning</li>
-                                <li>2 Bathrooms cleaning</li>
-                                <li>1 Living room Cleaning</li>
-                                <li>Vacuum Cleaning</li>
-                                <li>Within 6 Hours</li>
+                                {% for feature in plan.feature_list %}
+                                <li>{{ feature }}</li>
+                                {% endfor %}
                             </ul>
                         </div>
                     </div>
@@ -354,68 +219,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-4">
-                <div class="price-item featured-item">
-                    <div class="price-header">
-                        <div class="price-icon">
-                            <i class="fa fa-star"></i>
-                        </div>
-                        <div class="price-title">
-                            <h2>Premium</h2>
-                        </div>
-                        <div class="price-pricing">
-                            <h2><small>$</small>149</h2>
-                        </div>
-                    </div>
-                    <div class="price-body">
-                        <div class="price-des">
-                            <ul>
-                                <li>5 Bedrooms cleaning</li>
-                                <li>3 Bathrooms cleaning</li>
-                                <li>2 Living room Cleaning</li>
-                                <li>Vacuum Cleaning</li>
-                                <li>Within 6 Hours</li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="price-footer">
-                        <div class="price-action">
-                            <a href=""><i class="fa fa-shopping-cart"></i>Book Now</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="price-item">
-                    <div class="price-header">
-                        <div class="price-icon">
-                            <i class="fa fa-gift"></i>
-                        </div>
-                        <div class="price-title">
-                            <h2>Enterprise</h2>
-                        </div>
-                        <div class="price-pricing">
-                            <h2><small>$</small>199</h2>
-                        </div>
-                    </div>
-                    <div class="price-body">
-                        <div class="price-des">
-                            <ul>
-                                <li>8 Bedrooms cleaning</li>
-                                <li>5 Bathrooms cleaning</li>
-                                <li>3 Living room Cleaning</li>
-                                <li>Vacuum Cleaning</li>
-                                <li>Within 12 Hours</li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="price-footer">
-                        <div class="price-action">
-                            <a href=""><i class="fa fa-shopping-cart"></i>Book Now</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            {% endfor %}
         </div>
     </div>
 </div>
