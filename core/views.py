@@ -1,15 +1,18 @@
 from django.shortcuts import render, redirect
-from .models import Project, Service, Feature, PricingPlan, ContactMessage, About, Story, TeamMember, FAQ
+from .models import Project, Service, Feature, PricingPlan, ContactMessage, About, Story, TeamMember, FAQ, Testimonial, BlogPost
 from django.contrib import messages
 from .forms import ContactForm
+from django.shortcuts import get_object_or_404
 
 def index(request):
     about = About.objects.first()
-    services = Service.objects.all()
+    services = Service.objects.all().order_by('-id')[:3]
     features = Feature.objects.all()
     team_members = TeamMember.objects.all()
     faqs = FAQ.objects.all()
     pricing_plans = PricingPlan.objects.all()
+    testimonials = Testimonial.objects.all()
+    blogs = BlogPost.objects.all().order_by('-publish_date')[:3]
 
     return render(request, 'core/index.html', {
         'about': about,
@@ -18,6 +21,8 @@ def index(request):
         'team_members': team_members,
         'faqs': faqs,
         'pricing_plans': pricing_plans,
+        'testimonials': testimonials,
+        'blogs': blogs
     })
 
 def about(request):
@@ -40,6 +45,12 @@ def services(request):
         'pricing_plans': pricing_plans
     })
 
+def services_detail(request, slug):
+    services = get_object_or_404(Service, slug=slug)
+    return render(request, 'core/service_detail.html', {
+        'services': services
+    })
+
 def projects(request):
     projects = Project.objects.all()
     return render(request, 'core/portfolio.html', {'projects': projects})
@@ -59,3 +70,11 @@ def contact(request):
         'form': form,
         'faqs': faqs
     })
+
+def blog(request):
+    blogs = BlogPost.objects.all().order_by('-publish_date')
+    return render(request, 'core/blog.html', {'blogs': blogs})
+
+def blog_detail(request, slug):
+    blog = get_object_or_404(BlogPost, slug=slug)
+    return render(request, 'core/blog_detail.html', {'blog': blog})

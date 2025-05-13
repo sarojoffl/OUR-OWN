@@ -1,4 +1,5 @@
 from django.db import models
+from django.utils.text import slugify
 
 class Project(models.Model):
     STATUS_CHOICES = [
@@ -26,8 +27,15 @@ class ContactMessage(models.Model):
 
 class Service(models.Model):
     title = models.CharField(max_length=100)
+    slug = models.SlugField(blank=True)
     description = models.TextField()
     image = models.ImageField(upload_to='services/')
+
+    def save(self, *args, **kwargs):
+        # Automatically create a slug from the title
+        if not self.slug:
+            self.slug = slugify(self.title)
+        super().save(*args, **kwargs)
 
     def __str__(self):
         return self.title
@@ -81,3 +89,30 @@ class FAQ(models.Model):
 
     def __str__(self):
         return self.question
+
+class Testimonial(models.Model):
+    customer_name = models.CharField(max_length=100)
+    profession = models.CharField(max_length=100)
+    content = models.TextField()
+    image = models.ImageField(upload_to='testimonials/')
+    
+    def __str__(self):
+        return self.customer_name
+    
+class BlogPost(models.Model):
+    title = models.CharField(max_length=255)
+    category = models.CharField(max_length=100, blank=True)
+    author = models.CharField(max_length=100, blank=True)
+    slug = models.SlugField(unique=True)
+    content = models.TextField()
+    image = models.ImageField(upload_to='blog/')
+    publish_date = models.DateField()
+
+    def save(self, *args, **kwargs):
+        # Automatically create a slug from the title
+        if not self.slug:
+            self.slug = slugify(self.title)
+        super().save(*args, **kwargs)
+
+    def __str__(self):
+        return self.title

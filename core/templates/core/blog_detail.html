@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<!-- Blog Detail Start -->
+<div class="blog-detail">
+    <div class="container">
+        <div class="section-header text-center">
+            <p>{{ blog.category }}</p>
+            <h2>{{ blog.title }}</h2>
+            <div class="meta">
+                <i class="fa fa-user"></i> {{ blog.author }} &nbsp;|&nbsp;
+                <i class="fa fa-calendar-alt"></i> {{ blog.publish_date|date:"F j, Y" }}
+            </div>
+        </div>
+
+        <div class="blog-img text-center">
+            <img src="{{ blog.image.url }}" alt="{{ blog.title }}" class="img-fluid rounded">
+        </div>
+
+        <div class="blog-content mt-4">
+            <p>{{ blog.content|linebreaks }}</p>
+        </div>
+
+        <div class="back-btn text-center mt-5">
+            <a href="{% url 'blog' %}" class="btn btn-primary">← Back to Blog</a>
+        </div>
+    </div>
+</div>
+<!-- Blog Detail End -->
+{% endblock %}

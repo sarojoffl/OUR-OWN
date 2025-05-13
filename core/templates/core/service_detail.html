@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<!-- Service Detail Start -->
+<div class="service-detail">
+    <div class="container">
+        <div class="section-header text-center">
+            <h2>{{ services.title }}</h2>
+            <p>{{ services.created_at }}</p>
+        </div>
+        <div class="text-center mb-4">
+            <img src="{{ services.image.url }}" alt="{{ services.title }}" class="img-fluid rounded">
+        </div>
+        <div class="service-content">
+            <p>{{ services.description|linebreaks }}</p>
+        </div>
+        <div class="text-center mt-5">
+            <a href="{% url 'services' %}" class="btn btn-primary">← Back to Services</a>
+        </div>
+    </div>
+</div>
+<!-- Service Detail End -->
+{% endblock %}
