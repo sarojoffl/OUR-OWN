@@ -40,33 +40,57 @@
             <p>Company Story</p>
             <h2>Learn About Our Journey</h2>
         </div>
-        <div class="story-container">
-            <div class="story-end"><p>Now</p></div>
-            <div class="story-continue">
-                {% for story in stories %}
-                    <div class="row {% cycle 'story-right' 'story-left' %}">
-                        {% if forloop.counter|divisibleby:"2" %}
-                            <div class="col-md-6 d-md-none d-block">
-                                <p class="story-date">{{ story.date|date:"d M Y" }}</p>
-                            </div>
-                        {% endif %}
-                        <div class="col-md-6">
-                            <div class="story-box">
-                                <div class="story-text">
-                                    <h3>{{ story.title }}</h3>
-                                    <p>{{ story.description }}</p>
-                                </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="story-container">
+                    <div class="story-end"><p>Now</p></div>
+                    <div class="story-continue">
+    {% for story in stories %}
+        <div class="row {% if forloop.counter|divisibleby:"2" %}story-left{% else %}story-right{% endif %}">
+            {% if forloop.counter|divisibleby:"2" %}
+                <!-- Even = Story left, Date right -->
+                <div class="col-md-6">
+                    <div class="story-box">
+                        <div class="story-text">
+                            <h3>{{ story.title }}</h3>
+                            <p>{{ story.description }}</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 d-flex align-items-center justify-content-center">
+                    <p class="story-date">{{ story.date|date:"d M Y" }}</p>
+                </div>
+            {% else %}
+                <!-- Odd = Date left, Story right -->
+                <div class="col-md-6 d-flex align-items-center justify-content-center">
+                    <p class="story-date">{{ story.date|date:"d M Y" }}</p>
+                </div>
+                <div class="col-md-6">
+                    <div class="story-box">
+                        <div class="story-text">
+                            <h3>{{ story.title }}</h3>
+                            <p>{{ story.description }}</p>
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
+        </div>
+    {% endfor %}
+</div>
+
+                    <div class="story-start"><p>Launch</p></div>
+                    {% with launch=stories|last %}
+                    <div class="story-launch">
+                        <div class="story-box">
+                            <div class="story-text">
+                                <h3>Launched our company on {{ launch.date|date:"d M Y" }}</h3>
+                                <p>{{ launch.description }}</p>
                             </div>
                         </div>
-                        {% if not forloop.counter|divisibleby:"2" %}
-                            <div class="col-md-6 d-md-block d-none">
-                                <p class="story-date">{{ story.date|date:"d M Y" }}</p>
-                            </div>
-                        {% endif %}
                     </div>
-                {% endfor %}
+                    {% endwith %}
+                </div>
             </div>
-            <div class="story-start"><p>Launch</p></div>
         </div>
     </div>
 </div>

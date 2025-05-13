@@ -99,11 +99,13 @@
                         </div>
                     </div>
                     <div class="price-body">
-                        <ul>
-                            {% for item in plan.feature_list %}
-                            <li>{{ item }}</li>
-                            {% endfor %}
-                        </ul>
+                        <div class="price-des">
+                            <ul>
+                                {% for item in plan.feature_list %}
+                                <li>{{ item }}</li>
+                                {% endfor %}
+                            </ul>
+                        </div>
                     </div>
                     <div class="price-footer">
                         <div class="price-action">

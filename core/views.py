@@ -22,7 +22,7 @@ def index(request):
 
 def about(request):
     about = About.objects.first()
-    stories = Story.objects.all().order_by('-date')
+    stories = list(Story.objects.all().order_by('-date'))
     team = TeamMember.objects.all()
     return render(request, 'core/about.html', {
         'about': about,
