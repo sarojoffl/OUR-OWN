@@ -1,6 +1,6 @@
 # forms.py
 from django import forms
-from .models import ContactMessage, Booking
+from .models import ContactMessage, Booking, BlogPost
 from datetime import time
 from django.utils import timezone
 
@@ -32,3 +32,8 @@ class BookingForm(forms.ModelForm):
         if not time(10, 0) <= booking_datetime.time() <= time(18, 0):
             raise forms.ValidationError("Bookings are allowed only between 10 AM and 6 PM.")
         return booking_datetime
+    
+class BlogPostForm(forms.ModelForm):
+    class Meta:
+        model = BlogPost
+        fields = ['title', 'category', 'author', 'slug', 'content', 'image', 'publish_date']

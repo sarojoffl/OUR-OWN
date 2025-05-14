@@ -18,6 +18,12 @@ urlpatterns = [
     path('login/', admin_views.admin_login, name='admin_login'),
     path('logout/', admin_views.admin_logout, name='admin_logout'),
     path('contact-messages/', admin_views.admin_contact_messages, name='admin_contact_messages'),
+    path('delete-contact-message/<int:message_id>/', admin_views.admin_delete_contact_message, name='admin_delete_contact_message'),
+    path('dashboard/blog/', admin_views.admin_view_blog_posts, name='admin_view_blog_posts'),
+    path('dashboard/blog/add/', admin_views.admin_add_blog_post, name='admin_add_blog_post'),
+    path('dashboard/blog/update/<int:post_id>/', admin_views.admin_update_blog_post, name='admin_update_blog_post'),
+    path('dashboard/blog/delete/<int:post_id>/', admin_views.admin_delete_blog_post, name='admin_delete_blog_post'),
 ]
+
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

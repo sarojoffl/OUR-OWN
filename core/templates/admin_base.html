@@ -60,10 +60,24 @@
 
                         <!-- Content Section -->
                         <div class="sb-sidenav-menu-heading">Content</div>
-                        <a class="nav-link" href="#">
-                            <div class="sb-nav-link-icon"><i class="fas fa-blog"></i></div>
-                            Blog Posts
-                        </a>
+                        
+                        <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
+                                <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
+                                Blog Posts
+                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                            </a>
+                            <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+                                <nav class="sb-sidenav-menu-nested nav">
+                                    <a class="nav-link" href="{% url 'admin_add_blog_post' %}">
+                                        <div class="sb-nav-link-icon"><i class="fas fa-plus"></i></div>
+                                        Add Blog Post
+                                    </a>
+                                    <a class="nav-link" href="{% url 'admin_view_blog_posts' %}">
+                                        <div class="sb-nav-link-icon"><i class="fas fa-eye"></i></div>
+                                        View Blog Posts
+                                    </a>
+                                </nav>
+                            </div>
                         <a class="nav-link" href="#">
                             <div class="sb-nav-link-icon"><i class="fas fa-question-circle"></i></div>
                             FAQs
@@ -72,7 +86,6 @@
                             <div class="sb-nav-link-icon"><i class="fas fa-envelope-open-text"></i></div>
                             Contact Messages
                         </a>
-
                     </div>
                 </div>
                 <div class="sb-sidenav-footer">
