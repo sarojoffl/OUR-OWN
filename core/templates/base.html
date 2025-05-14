@@ -15,6 +15,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;300;400&display=swap" rel="stylesheet">
 
     <!-- CSS Libraries -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
     <link href="{% static 'lib/owlcarousel/assets/owl.carousel.min.css' %}" rel="stylesheet">
@@ -70,7 +72,22 @@
                                     <a href="{% url 'projects' %}" class="nav-item nav-link">Project</a>
                                     <a href="{% url 'blog' %}" class="nav-item nav-link">Blog</a>
                                     <a href="{% url 'contact' %}" class="nav-item nav-link">Contact</a>
+
+                                    {% if user.is_authenticated %}
+                                        <a href="{% url 'admin_dashboard' %}" class="nav-item nav-link">
+                                            <i class="bi bi-speedometer2" title="Dashboard"></i>
+                                        </a>
+                                        <a href="{% url 'admin_logout' %}" class="nav-item nav-link">
+                                            <i class="bi bi-box-arrow-right" title="Logout"></i>
+                                        </a>
+                                    {% else %}
+                                        <a href="{% url 'admin_login' %}" class="nav-item nav-link">
+                                            <i class="bi bi-box-arrow-in-right" title="Login"></i>
+                                        </a>
+                                    {% endif %}
                                 </div>
+                            </div>
+
                             </div>
                         </div>
                     </div>
@@ -91,21 +108,22 @@
             <div class="container">
                 <div class="row">
                     <!-- Footer content columns here, unchanged -->
-                    <div class="col-md-6 col-lg-3">
-                        <div class="footer-contact">
-                            <h2>Get In Touch</h2>
-                            <p><i class="fa fa-map-marker-alt"></i>123 Street, New York, USA</p>
-                            <p><i class="fa fa-phone-alt"></i>+012 345 67890</p>
-                            <p><i class="fa fa-envelope"></i>info@example.com</p>
-                            <div class="footer-social">
-                                <a href="#"><i class="fab fa-twitter"></i></a>
-                                <a href="#"><i class="fab fa-facebook-f"></i></a>
-                                <a href="#"><i class="fab fa-youtube"></i></a>
-                                <a href="#"><i class="fab fa-instagram"></i></a>
-                                <a href="#"><i class="fab fa-linkedin-in"></i></a>
-                            </div>
-                        </div>
-                    </div>
+                   <div class="col-md-6 col-lg-3">
+    <div class="footer-contact">
+        <h2>Get In Touch</h2>
+        <p><i class="fa fa-map-marker-alt"></i>123 Street, New York, USA</p>
+        <p><i class="fa fa-phone-alt"></i>+012 345 67890</p>
+        <p><i class="fa fa-envelope"></i>info@example.com</p>
+        <div class="footer-social">
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="#"><i class="fab fa-facebook-f"></i></a>
+            <a href="#"><i class="fab fa-youtube"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-linkedin-in"></i></a>
+        </div>
+    </div>
+</div>
+
                     <!-- ... Other footer columns ... -->
                 </div>
             </div>
@@ -136,6 +154,7 @@
 
     <!-- JavaScript Libraries -->
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
     <script src="{% static 'lib/easing/easing.min.js' %}"></script>
     <script src="{% static 'lib/owlcarousel/owl.carousel.min.js' %}"></script>

@@ -1,8 +1,9 @@
 from django.shortcuts import render, redirect
-from .models import Project, Service, Feature, PricingPlan, ContactMessage, About, Story, TeamMember, FAQ, Testimonial, BlogPost
+from .models import Project, Service, Feature, PricingPlan, About, Story, TeamMember, FAQ, Testimonial, BlogPost, Booking
 from django.contrib import messages
-from .forms import ContactForm
+from .forms import ContactForm, BookingForm
 from django.shortcuts import get_object_or_404
+
 
 def index(request):
     about = About.objects.first()
@@ -78,3 +79,17 @@ def blog(request):
 def blog_detail(request, slug):
     blog = get_object_or_404(BlogPost, slug=slug)
     return render(request, 'core/blog_detail.html', {'blog': blog})
+
+def book_plan(request, plan_id):
+    plan = get_object_or_404(PricingPlan, id=plan_id)
+    if request.method == 'POST':
+        form = BookingForm(request.POST)
+        if form.is_valid():
+            print(form.cleaned_data)
+            customer = form.save(commit=False)
+            customer.plan = plan
+            customer.save()
+            return render(request, 'core/booking_confirmation.html', {'customer': customer})
+    else:
+        form = BookingForm(initial={'plan': plan})
+    return render(request, 'core/book_now.html', {'form': form, 'plan': plan})

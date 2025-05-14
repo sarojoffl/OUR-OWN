@@ -1,0 +1,81 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Book Now{% endblock %}
+{% block content %}
+
+<form method="POST" class="container py-5">
+    {% csrf_token %}
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card shadow-sm">
+                <div class="card-header text-center bg-primary text-white">
+                    <h3>Booking Form</h3>
+                </div>
+                <div class="card-body">
+                    <div class="form-group">
+                        <label for="id_name">Name</label>
+                        <input type="text" name="name" class="form-control" id="id_name" value="{{ form.name.value|default:'' }}">
+                        {% if form.name.errors %}
+                            <div class="text-danger small">{{ form.name.errors|striptags }}</div>
+                        {% endif %}
+                    </div>
+
+                    <div class="form-group">
+                        <label for="id_email">Email</label>
+                        <input type="email" name="email" class="form-control" id="id_email" value="{{ form.email.value|default:'' }}">
+                        {% if form.email.errors %}
+                            <div class="text-danger small">{{ form.email.errors|striptags }}</div>
+                        {% endif %}
+                    </div>
+
+                    <div class="form-group">
+                        <label for="id_phone">Phone</label>
+                        <input type="text" name="phone" class="form-control" id="id_phone" value="{{ form.phone.value|default:'' }}">
+                        {% if form.phone.errors %}
+                            <div class="text-danger small">{{ form.phone.errors|striptags }}</div>
+                        {% endif %}
+                    </div>
+
+                    <div class="form-group">
+                        <label for="id_booking_date">Booking Date</label>
+                        <input type="datetime-local" name="booking_date" class="form-control" id="id_booking_date"
+                               value="{{ form.booking_date.value|default:'' }}">
+                        {% if form.booking_date.errors %}
+                            <div class="text-danger small">{{ form.booking_date.errors|striptags }}</div>
+                        {% endif %}
+                        <span class="text-muted small">Please select a date and time between 10:00 AM and 6:00 PM.</span>
+                    </div>
+
+                    <!-- Hidden plan field -->
+                    <input type="hidden" name="plan" value="{{ form.plan.value }}">
+
+                    <div class="text-center">
+                        <button type="submit" class="btn btn-success btn-lg mt-4">Confirm Booking</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+
+<script>
+    const input = document.getElementById("id_booking_date");
+
+    // Set minimum date-time to current time rounded up to next full minute
+    const now = new Date();
+    now.setMinutes(now.getMinutes() + 1); // Round up to avoid invalid input
+    input.min = now.toISOString().slice(0,16); // Format for datetime-local
+
+    input.addEventListener('change', function () {
+        const selected = new Date(this.value);
+        const hour = selected.getHours();
+
+        if (hour < 10 || hour >= 18) {
+            alert("Please choose a time between 10:00 AM and 6:00 PM.");
+            this.value = "";  // Reset invalid value
+        }
+    });
+</script>
+
+{% endblock %}

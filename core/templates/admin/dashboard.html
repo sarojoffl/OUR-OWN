@@ -1,0 +1,50 @@
+{% extends "admin_base.html" %}
+
+{% block title %}Admin Dashboard{% endblock %}
+
+{% block content %}
+<h1 class="mt-4">Admin Dashboard</h1>
+<p>Welcome, {{ request.user.first_name|default:request.user.username }}!</p>
+
+<div class="row mt-4">
+    <!-- Total Bookings -->
+    <div class="col-md-3">
+        <div class="card text-white bg-primary mb-3">
+            <div class="card-body">
+                <h5 class="card-title">Total Bookings</h5>
+                <p class="card-text fs-4">{{ total_bookings }}</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Services Offered -->
+    <div class="col-md-3">
+        <div class="card text-white bg-success mb-3">
+            <div class="card-body">
+                <h5 class="card-title">Services</h5>
+                <p class="card-text fs-4">{{ total_services }}</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Blog Posts -->
+    <div class="col-md-3">
+        <div class="card text-dark bg-warning mb-3">
+            <div class="card-body">
+                <h5 class="card-title">Blog Posts</h5>
+                <p class="card-text fs-4">{{ total_blogs }}</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Contact Messages -->
+    <div class="col-md-3">
+        <div class="card text-white bg-danger mb-3">
+            <div class="card-body">
+                <h5 class="card-title">Messages</h5>
+                <p class="card-text fs-4">{{ total_messages }}</p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
