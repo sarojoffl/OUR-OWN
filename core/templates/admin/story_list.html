@@ -2,7 +2,14 @@
 
 {% block content %}
 <h2>Our Stories</h2>
-
+    {% if messages %}
+        {% for message in messages %}
+            <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+                {{ message }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        {% endfor %}
+    {% endif %}
 <div class="text-end mb-3">
     <a href="{% url 'add_story' %}" class="btn btn-success">Add Story</a>
 </div>

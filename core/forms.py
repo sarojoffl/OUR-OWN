@@ -1,6 +1,6 @@
 # forms.py
 from django import forms
-from .models import ContactMessage, Booking, BlogPost, FAQ, Testimonial, About, Story
+from .models import ContactMessage, Booking, BlogPost, FAQ, Testimonial, About, Story, TeamMember
 from datetime import time
 from django.utils import timezone
 
@@ -80,3 +80,8 @@ class StoryForm(forms.ModelForm):
         widgets = {
             'description': forms.Textarea(attrs={'rows': 4}),
         }
+
+class TeamMemberForm(forms.ModelForm):
+    class Meta:
+        model = TeamMember
+        fields = '__all__'

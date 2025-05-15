@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from datetime import datetime
-from .models import Booking, Service, BlogPost, ContactMessage, FAQ, Testimonial, About, Story
-from .forms import BlogPostForm, FAQForm, BookingStatusForm, AboutForm, StoryForm
+from .models import Booking, Service, BlogPost, ContactMessage, FAQ, Testimonial, About, Story, TeamMember
+from .forms import BlogPostForm, FAQForm, BookingStatusForm, AboutForm, StoryForm, TeamMemberForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
@@ -229,3 +229,39 @@ def delete_story(request, pk):
         messages.success(request, "Story deleted.")
         return redirect('admin_story_list')
     return render(request, 'admin/story_delete.html', {'story': story})
+
+# ---------- TEAM ----------
+def team_list(request):
+    members = TeamMember.objects.all()
+    return render(request, 'admin/team_list.html', {'members': members})
+
+def add_team_member(request):
+    if request.method == 'POST':
+        form = TeamMemberForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            messages.success(request, "Team member added successfully.")
+            return redirect('team_list')
+    else:
+        form = TeamMemberForm()
+    return render(request, 'admin/team_form.html', {'form': form, 'action': 'Add'})
+
+def edit_team_member(request, pk):
+    member = get_object_or_404(TeamMember, pk=pk)
+    if request.method == 'POST':
+        form = TeamMemberForm(request.POST, request.FILES, instance=member)
+        if form.is_valid():
+            form.save()
+            messages.success(request, "Team member updated successfully.")
+            return redirect('team_list')
+    else:
+        form = TeamMemberForm(instance=member)
+    return render(request, 'admin/team_form.html', {'form': form, 'action': 'Edit'})
+
+def delete_team_member(request, pk):
+    member = get_object_or_404(TeamMember, pk=pk)
+    if request.method == 'POST':
+        member.delete()
+        messages.success(request, "Team member deleted successfully.")
+        return redirect('team_list')
+    return render(request, 'admin/team_confirm_delete.html', {'member': member})

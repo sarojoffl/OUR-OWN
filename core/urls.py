@@ -41,6 +41,12 @@ urlpatterns = [
     path('dashboard/stories/add/', admin_views.add_story, name='add_story'),
     path('dashboard/stories/edit/<int:pk>/', admin_views.edit_story, name='edit_story'),
     path('dashboard/stories/delete/<int:pk>/', admin_views.delete_story, name='delete_story'),
+
+    # Team
+    path('team/', admin_views.team_list, name='team_list'),
+    path('team/add/', admin_views.add_team_member, name='add_team_member'),
+    path('team/edit/<int:pk>/', admin_views.edit_team_member, name='edit_team_member'),
+    path('team/delete/<int:pk>/', admin_views.delete_team_member, name='delete_team_member'),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
