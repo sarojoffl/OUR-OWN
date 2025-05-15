@@ -23,7 +23,16 @@ urlpatterns = [
     path('dashboard/blog/add/', admin_views.admin_add_blog_post, name='admin_add_blog_post'),
     path('dashboard/blog/update/<int:post_id>/', admin_views.admin_update_blog_post, name='admin_update_blog_post'),
     path('dashboard/blog/delete/<int:post_id>/', admin_views.admin_delete_blog_post, name='admin_delete_blog_post'),
+    path('dashboard/faq/', admin_views.admin_view_faqs, name='admin_view_faqs'),
+    path('dashboard/faq/add/', admin_views.admin_add_faq, name='admin_add_faq'),
+    path('dashboard/faq/update/<int:faq_id>/', admin_views.admin_update_faq, name='admin_update_faq'),
+    path('dashboard/faq/delete/<int:faq_id>/', admin_views.admin_delete_faq, name='admin_delete_faq'),
+    path('dashboard/bookings/', admin_views.admin_view_bookings, name='admin_view_bookings'),
+    path('dashboard/bookings/update/<int:booking_id>/', admin_views.admin_update_booking_status, name='admin_update_booking_status'),
+    path('dashboard/testimonials/', admin_views.admin_view_testimonials, name='admin_view_testimonials'),
+    path('dashboard/testimonials/add/', admin_views.admin_add_testimonial, name='admin_add_testimonial'),
+    path('dashboard/testimonials/update/<int:testimonial_id>/', admin_views.admin_update_testimonial, name='admin_update_testimonial'),
+    path('dashboard/testimonials/delete/<int:testimonial_id>/', admin_views.admin_delete_testimonial, name='admin_delete_testimonial'),
 ]
-
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

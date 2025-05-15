@@ -1,0 +1,13 @@
+{% extends 'admin_base.html' %}
+{% block title %}Update Booking Status{% endblock %}
+{% block content %}
+<div class="container mt-4">
+    <h3>Update Booking Status for {{ booking.name }}</h3>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-primary">Update Status</button>
+        <a href="{% url 'admin_view_bookings' %}" class="btn btn-secondary">Cancel</a>
+    </form>
+</div>
+{% endblock %}

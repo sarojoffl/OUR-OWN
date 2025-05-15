@@ -1,0 +1,15 @@
+{% extends 'admin_base.html' %}
+
+{% block title %}Delete Testimonial{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1 class="mb-4 text-danger">Delete Testimonial</h1>
+    <p>Are you sure you want to delete the testimonial from <strong>{{ testimonial.customer_name }}</strong>?</p>
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-danger">Yes, Delete</button>
+        <a href="{% url 'admin_view_testimonials' %}" class="btn btn-secondary ms-2">Cancel</a>
+    </form>
+</div>
+{% endblock %}

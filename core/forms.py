@@ -1,6 +1,6 @@
 # forms.py
 from django import forms
-from .models import ContactMessage, Booking, BlogPost
+from .models import ContactMessage, Booking, BlogPost, FAQ, Testimonial
 from datetime import time
 from django.utils import timezone
 
@@ -36,4 +36,29 @@ class BookingForm(forms.ModelForm):
 class BlogPostForm(forms.ModelForm):
     class Meta:
         model = BlogPost
-        fields = ['title', 'category', 'author', 'slug', 'content', 'image', 'publish_date']
+        exclude = ['slug', 'publish_date']
+
+class FAQForm(forms.ModelForm):
+    class Meta:
+        model = FAQ
+        fields = ['question', 'answer']
+
+class BookingStatusForm(forms.ModelForm):
+    class Meta:
+        model = Booking
+        fields = ['status', 'admin_comment']
+        widgets = {
+            'status': forms.Select(attrs={'class': 'form-select w-50'}),
+            'admin_comment': forms.Textarea(attrs={'class': 'form-control w-50', 'rows': 3}),
+        }
+
+class TestimonialForm(forms.ModelForm):
+    class Meta:
+        model = Testimonial
+        fields = ['customer_name', 'profession', 'content', 'image']
+        widgets = {
+            'customer_name': forms.TextInput(attrs={'class': 'form-control'}),
+            'profession': forms.TextInput(attrs={'class': 'form-control'}),
+            'content': forms.Textarea(attrs={'class': 'form-control', 'rows': 3}),
+            'image': forms.ClearableFileInput(attrs={'class': 'form-control'}),
+        }

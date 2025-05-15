@@ -1,0 +1,43 @@
+{% extends 'admin_base.html' %}
+
+{% load static %}
+{% block title %}Manage Testimonials{% endblock %}
+
+{% block content %}
+<h1>Testimonials</h1>
+    {% if messages %}
+        {% for message in messages %}
+            <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+                {{ message }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        {% endfor %}
+    {% endif %}
+<a href="{% url 'admin_add_testimonial' %}" class="btn btn-primary mb-3">Add New Testimonial</a>
+
+<table class="table table-bordered" id="testimonialsTable">
+    <thead>
+        <tr>
+            <th>Customer Name</th>
+            <th>Profession</th>
+            <th>Content</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for testimonial in testimonials %}
+        <tr>
+            <td>{{ testimonial.customer_name }}</td>
+            <td>{{ testimonial.profession }}</td>
+            <td>{{ testimonial.content|truncatewords:15 }}</td>
+            <td>
+                <a href="{% url 'admin_update_testimonial' testimonial.id %}" class="btn btn-sm btn-warning">Edit</a>
+                <a href="{% url 'admin_delete_testimonial' testimonial.id %}" class="btn btn-sm btn-danger">Delete</a>
+            </td>
+        </tr>
+        {% empty %}
+        <tr><td colspan="4" class="text-center">No testimonials found.</td></tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

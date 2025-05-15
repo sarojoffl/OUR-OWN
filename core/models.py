@@ -107,10 +107,9 @@ class BlogPost(models.Model):
     slug = models.SlugField(unique=True)
     content = models.TextField()
     image = models.ImageField(upload_to='blog/')
-    publish_date = models.DateField()
+    publish_date = models.DateField(auto_now_add=True)
 
     def save(self, *args, **kwargs):
-        # Automatically create a slug from the title
         if not self.slug:
             self.slug = slugify(self.title)
         super().save(*args, **kwargs)
@@ -125,6 +124,21 @@ class Booking(models.Model):
     plan = models.ForeignKey('PricingPlan', on_delete=models.CASCADE)
     booking_date = models.DateTimeField()
     booked_on = models.DateTimeField(auto_now_add=True)
+    
+    STATUS_CHOICES = [
+        ('pending', 'Pending'),
+        ('accepted', 'Accepted'),
+        ('rejected', 'Rejected'),
+    ]
+    status = models.CharField(max_length=10, choices=STATUS_CHOICES, default='pending')
+    admin_comment = models.TextField(blank=True, null=True)
+
+    def __str__(self):
+        return f"{self.name} - {self.status}"
+
+
+    class Meta:
+        unique_together = ('email', 'booking_date')
 
     def __str__(self):
         return self.name

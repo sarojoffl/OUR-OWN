@@ -1,0 +1,47 @@
+{% extends 'admin_base.html' %}
+{% block title %}Bookings{% endblock %}
+{% block content %}
+<div class="container mt-4">
+    <h3 class="mb-4">Bookings</h3>
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Plan</th>
+                <th>Booking Date</th>
+                <th>Status</th>
+                <th>Booked On</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for booking in bookings %}
+            <tr>
+                <td>{{ booking.name }}</td>
+                <td>{{ booking.email }}</td>
+                <td>{{ booking.plan }}</td>
+                <td>{{ booking.booking_date }}</td>
+                <td>
+                    <span class="badge 
+                        {% if booking.status == 'pending' %} bg-warning 
+                        {% elif booking.status == 'accepted' %} bg-success 
+                        {% elif booking.status == 'rejected' %} bg-danger 
+                        {% endif %}">
+                        {{ booking.get_status_display }}
+                    </span>
+                </td>
+                <td>{{ booking.booked_on }}</td>
+                <td>
+                    <a href="{% url 'admin_update_booking_status' booking.id %}" class="btn btn-sm btn-primary">Update</a>
+                </td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="7" class="text-center">No bookings found.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}
