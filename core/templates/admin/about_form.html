@@ -1,0 +1,54 @@
+{% extends "admin_base.html" %}
+
+{% load static %}
+{% block title %}Edit About{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+<h2>Edit About</h2>
+<form method="post" enctype="multipart/form-data">
+  {% csrf_token %}
+  
+  <div class="mb-3">
+    <label for="id_experience_years" class="form-label">Experience Years</label>
+    <input type="number" name="experience_years" class="form-control" id="id_experience_years" 
+           value="{{ form.experience_years.value|default_if_none:'' }}">
+  </div>
+
+  <div class="mb-3">
+    <label for="id_title" class="form-label">Title</label>
+    <input type="text" name="title" class="form-control" id="id_title" 
+           value="{{ form.title.value|default_if_none:'' }}">
+  </div>
+
+  <div class="mb-3">
+    <label for="id_description" class="form-label">Description</label>
+    <textarea name="description" class="form-control" id="id_description" rows="4">{{ form.description.value|default_if_none:'' }}</textarea>
+  </div>
+
+  <div class="mb-3">
+    <label for="id_more_info" class="form-label">More Info</label>
+    <textarea name="more_info" class="form-control" id="id_more_info" rows="4">{{ form.more_info.value|default_if_none:'' }}</textarea>
+  </div>
+
+  <div class="mb-3">
+    <label for="id_why_choose_us" class="form-label">Why Choose Us</label>
+    <textarea name="why_choose_us" class="form-control" id="id_why_choose_us" rows="3">{{ form.why_choose_us.value|default_if_none:'' }}</textarea>
+  </div>
+
+  <div class="mb-3">
+    <label for="id_image" class="form-label">Image</label>
+    {% if form.instance.image %}
+      <div class="mb-2">
+        <img src="{{ form.instance.image.url }}" alt="Current Image" class="img-thumbnail" width="200">
+      </div>
+    {% endif %}
+    <input type="file" name="image" class="form-control" id="id_image">
+  </div>
+
+  <button type="submit" class="btn btn-primary">Save</button>
+  <a href="{% url 'admin_about_view' %}" class="btn btn-secondary">Cancel</a>
+</form>
+
+</div>
+{% endblock %}

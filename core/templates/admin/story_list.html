@@ -1,0 +1,31 @@
+{% extends "admin_base.html" %}
+
+{% block content %}
+<h2>Our Stories</h2>
+
+<div class="text-end mb-3">
+    <a href="{% url 'add_story' %}" class="btn btn-success">Add Story</a>
+</div>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Title</th>
+            <th>Date</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for story in stories %}
+        <tr>
+            <td>{{ story.title }}</td>
+            <td>{{ story.date }}</td>
+            <td>
+                <a href="{% url 'edit_story' story.pk %}" class="btn btn-sm btn-warning">Edit</a>
+                <a href="{% url 'delete_story' story.pk %}" class="btn btn-sm btn-danger">Delete</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

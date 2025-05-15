@@ -1,0 +1,29 @@
+{% extends "admin_base.html" %}
+{% block content %}
+<div class="container mt-4">
+  <h2 class="mb-4">About Section</h2>
+  {% if about %}
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">{{ about.title }}</h5>
+        <p class="card-text"><strong>Experience Years:</strong> {{ about.experience_years }}</p>
+        <p class="card-text"><strong>Description:</strong> {{ about.description }}</p>
+        <p class="card-text"><strong>More Info:</strong> {{ about.more_info }}</p>
+        {% if about.why_choose_us %}
+          <p class="card-text"><strong>Why Choose Us:</strong> {{ about.why_choose_us }}</p>
+        {% endif %}
+        {% if about.image %}
+          <div class="text-center my-3">
+            <img src="{{ about.image.url }}" alt="About Image" class="img-fluid img-thumbnail" style="max-width: 300px;">
+          </div>
+        {% endif %}
+        <a href="{% url 'edit_about' %}" class="btn btn-warning mt-3">Edit About</a>
+      </div>
+    </div>
+  {% else %}
+    <div class="alert alert-warning" role="alert">
+      No About info found. <a href="{% url 'edit_about' %}" class="alert-link">Add now</a>
+    </div>
+  {% endif %}
+</div>
+{% endblock %}

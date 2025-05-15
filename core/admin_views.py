@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from datetime import datetime
-from .models import Booking, Service, BlogPost, ContactMessage, FAQ, Testimonial
-from .forms import BlogPostForm, FAQForm, BookingStatusForm, TestimonialForm
+from .models import Booking, Service, BlogPost, ContactMessage, FAQ, Testimonial, About, Story
+from .forms import BlogPostForm, FAQForm, BookingStatusForm, AboutForm, StoryForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
@@ -167,29 +167,6 @@ def admin_view_testimonials(request):
     testimonials = Testimonial.objects.all()
     return render(request, 'admin/admin_view_testimonials.html', {'testimonials': testimonials})
 
-def admin_add_testimonial(request):
-    if request.method == "POST":
-        form = TestimonialForm(request.POST, request.FILES)
-        if form.is_valid():
-            form.save()
-            messages.success(request, "Testimonial added successfully.")
-            return redirect('admin_view_testimonials')
-    else:
-        form = TestimonialForm()
-    return render(request, 'admin/testimonial_form.html', {'form': form, 'action': 'Add'})
-
-def admin_update_testimonial(request, testimonial_id):
-    testimonial = get_object_or_404(Testimonial, id=testimonial_id)
-    if request.method == "POST":
-        form = TestimonialForm(request.POST, request.FILES, instance=testimonial)
-        if form.is_valid():
-            form.save()
-            messages.success(request, "Testimonial updated successfully.")
-            return redirect('admin_view_testimonials')
-    else:
-        form = TestimonialForm(instance=testimonial)
-    return render(request, 'admin/testimonial_form.html', {'form': form, 'testimonial': testimonial, 'action': 'Update'})
-
 def admin_delete_testimonial(request, testimonial_id):
     testimonial = get_object_or_404(Testimonial, id=testimonial_id)
     if request.method == "POST":
@@ -197,3 +174,58 @@ def admin_delete_testimonial(request, testimonial_id):
         messages.success(request, "Testimonial deleted successfully.")
         return redirect('admin_view_testimonials')
     return render(request, 'admin/admin_delete_testimonial.html', {'testimonial': testimonial})
+
+
+# ---------- ABOUT ----------
+def admin_about_view(request):
+    about = About.objects.first()
+    return render(request, 'admin/about_view.html', {'about': about})
+
+def edit_about(request):
+    about = About.objects.first()
+    if request.method == 'POST':
+        form = AboutForm(request.POST, request.FILES, instance=about)
+        if form.is_valid():
+            form.save()
+            messages.success(request, "About section updated successfully.")
+            return redirect('admin_about_view')
+    else:
+        form = AboutForm(instance=about)
+    return render(request, 'admin/about_form.html', {'form': form})
+
+
+# ---------- STORY ----------
+def admin_story_list(request):
+    stories = Story.objects.all()
+    return render(request, 'admin/story_list.html', {'stories': stories})
+
+def add_story(request):
+    if request.method == 'POST':
+        form = StoryForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, "Story added successfully.")
+            return redirect('admin_story_list')
+    else:
+        form = StoryForm()
+    return render(request, 'admin/story_form.html', {'form': form, 'action': 'Add'})
+
+def edit_story(request, pk):
+    story = get_object_or_404(Story, pk=pk)
+    if request.method == 'POST':
+        form = StoryForm(request.POST, instance=story)
+        if form.is_valid():
+            form.save()
+            messages.success(request, "Story updated successfully.")
+            return redirect('admin_story_list')
+    else:
+        form = StoryForm(instance=story)
+    return render(request, 'admin/story_form.html', {'form': form, 'action': 'Edit'})
+
+def delete_story(request, pk):
+    story = get_object_or_404(Story, pk=pk)
+    if request.method == 'POST':
+        story.delete()
+        messages.success(request, "Story deleted.")
+        return redirect('admin_story_list')
+    return render(request, 'admin/story_delete.html', {'story': story})

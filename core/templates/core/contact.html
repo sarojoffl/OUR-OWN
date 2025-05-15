@@ -21,7 +21,7 @@
 </div>
 <!-- Page Header End -->
 
-<!-- Contact Start -->
+<!-- Contact & FAQ Start -->
 <div class="contact">
     <div class="container">
         <div class="section-header">
@@ -30,26 +30,26 @@
         </div>
         <div class="row">
             <!-- FAQ Section -->
-<div class="col-md-6">
-    <div class="faqs">
-        <div id="accordion">
-            {% for faq in faqs %}
-                <div class="card">
-                    <div class="card-header">
-                        <a class="card-link {% if not forloop.first %}collapsed{% endif %}" data-toggle="collapse" href="#collapse{{ forloop.counter }}">
-                            <span>{{ forloop.counter }}</span> {{ faq.question }}
-                        </a>
-                    </div>
-                    <div id="collapse{{ forloop.counter }}" class="collapse {% if forloop.first %}show{% endif %}" data-parent="#accordion">
-                        <div class="card-body">
-                            {{ faq.answer }}
-                        </div>
+            <div class="col-md-6">
+                <div class="faqs">
+                    <div id="accordion">
+                        {% for faq in faqs %}
+                            <div class="card">
+                                <div class="card-header">
+                                    <a class="card-link {% if not forloop.first %}collapsed{% endif %}" data-toggle="collapse" href="#collapse{{ forloop.counter }}">
+                                        <span>{{ forloop.counter }}</span> {{ faq.question }}
+                                    </a>
+                                </div>
+                                <div id="collapse{{ forloop.counter }}" class="collapse {% if forloop.first %}show{% endif %}" data-parent="#accordion">
+                                    <div class="card-body">
+                                        {{ faq.answer }}
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
                     </div>
                 </div>
-            {% endfor %}
-        </div>
-    </div>
-</div>
+            </div>
 
             <!-- Contact Form Section -->
             <div class="col-md-6">
@@ -83,8 +83,38 @@
                 </div>
             </div>
         </div>
+
+        <!-- Testimonial Submission Form -->
+        <div class="section-header mt-5">
+            <p>Testimonial</p>
+            <h2>Share Your Feedback</h2>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <form method="post" action="" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        {{ testimonial_form.customer_name.label_tag }}
+                        {{ testimonial_form.customer_name }}
+                    </div>
+                    <div class="form-group">
+                        {{ testimonial_form.profession.label_tag }}
+                        {{ testimonial_form.profession }}
+                    </div>
+                    <div class="form-group">
+                        {{ testimonial_form.content.label_tag }}
+                        {{ testimonial_form.content }}
+                    </div>
+                    <div class="form-group">
+                        {{ testimonial_form.image.label_tag }}
+                        {{ testimonial_form.image }}
+                    </div>
+                    <button type="submit" class="btn btn-primary">Submit Testimonial</button>
+                </form>
+            </div>
+        </div>
     </div>
 </div>
-<!-- Contact End -->
+<!-- Contact & FAQ End -->
 
 {% endblock %}

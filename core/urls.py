@@ -30,9 +30,17 @@ urlpatterns = [
     path('dashboard/bookings/', admin_views.admin_view_bookings, name='admin_view_bookings'),
     path('dashboard/bookings/update/<int:booking_id>/', admin_views.admin_update_booking_status, name='admin_update_booking_status'),
     path('dashboard/testimonials/', admin_views.admin_view_testimonials, name='admin_view_testimonials'),
-    path('dashboard/testimonials/add/', admin_views.admin_add_testimonial, name='admin_add_testimonial'),
-    path('dashboard/testimonials/update/<int:testimonial_id>/', admin_views.admin_update_testimonial, name='admin_update_testimonial'),
     path('dashboard/testimonials/delete/<int:testimonial_id>/', admin_views.admin_delete_testimonial, name='admin_delete_testimonial'),
+    
+    # About
+    path('dashboard/about/', admin_views.admin_about_view, name='admin_about_view'),
+    path('dashboard/about/edit/', admin_views.edit_about, name='edit_about'),
+
+    # Story
+    path('dashboard/stories/', admin_views.admin_story_list, name='admin_story_list'),
+    path('dashboard/stories/add/', admin_views.add_story, name='add_story'),
+    path('dashboard/stories/edit/<int:pk>/', admin_views.edit_story, name='edit_story'),
+    path('dashboard/stories/delete/<int:pk>/', admin_views.delete_story, name='delete_story'),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

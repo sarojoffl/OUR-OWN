@@ -124,7 +124,6 @@ class Booking(models.Model):
     plan = models.ForeignKey('PricingPlan', on_delete=models.CASCADE)
     booking_date = models.DateTimeField()
     booked_on = models.DateTimeField(auto_now_add=True)
-    
     STATUS_CHOICES = [
         ('pending', 'Pending'),
         ('accepted', 'Accepted'),
@@ -132,10 +131,6 @@ class Booking(models.Model):
     ]
     status = models.CharField(max_length=10, choices=STATUS_CHOICES, default='pending')
     admin_comment = models.TextField(blank=True, null=True)
-
-    def __str__(self):
-        return f"{self.name} - {self.status}"
-
 
     class Meta:
         unique_together = ('email', 'booking_date')

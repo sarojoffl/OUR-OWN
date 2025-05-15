@@ -1,7 +1,6 @@
 from django.shortcuts import render, redirect
-from .models import Project, Service, Feature, PricingPlan, About, Story, TeamMember, FAQ, Testimonial, BlogPost, Booking
+from .models import Project, Service, Feature, PricingPlan, About, Story, TeamMember, FAQ, Testimonial, BlogPost
 from django.contrib import messages
-from .forms import ContactForm, BookingForm
 from django.shortcuts import get_object_or_404
 
 
@@ -56,21 +55,44 @@ def projects(request):
     projects = Project.objects.all()
     return render(request, 'core/portfolio.html', {'projects': projects})
 
+from django.shortcuts import render, redirect
+from django.contrib import messages
+from .forms import ContactForm, TestimonialForm
+from .models import FAQ
+
 def contact(request):
     if request.method == "POST":
-        form = ContactForm(request.POST)
-        if form.is_valid():
-            form.save()
-            messages.success(request, "Your message has been sent successfully.")
-            return redirect('contact')
+        if 'name' in request.POST and 'email' in request.POST:
+            # Handle Contact Form submission
+            form = ContactForm(request.POST)
+            testimonial_form = TestimonialForm()  # empty for now
+            if form.is_valid():
+                form.save()
+                messages.success(request, "Your message has been sent successfully.")
+                return redirect('contact')
+        elif 'customer_name' in request.POST and 'profession' in request.POST:
+            # Handle Testimonial Form submission
+            testimonial_form = TestimonialForm(request.POST, request.FILES)
+            form = ContactForm()  # empty for now
+            if testimonial_form.is_valid():
+                testimonial_form.save()
+                messages.success(request, "Your testimonial has been submitted successfully.")
+                return redirect('contact')
+        else:
+            # Unexpected POST data
+            form = ContactForm()
+            testimonial_form = TestimonialForm()
     else:
         form = ContactForm()
+        testimonial_form = TestimonialForm()
 
     faqs = FAQ.objects.all()
     return render(request, 'core/contact.html', {
         'form': form,
+        'testimonial_form': testimonial_form,
         'faqs': faqs
     })
+
 
 def blog(request):
     blogs = BlogPost.objects.all().order_by('-publish_date')

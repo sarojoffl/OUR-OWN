@@ -11,6 +11,11 @@
             </div>
         {% endfor %}
     {% endif %}
+
+    <div class="text-end mb-3">
+        <a href="{% url 'admin_add_blog_post' %}" class="btn btn-success mb-3">Add Blog Post</a>
+    </div>
+
     <table class="table table-bordered table-striped">
         <thead>
             <tr>

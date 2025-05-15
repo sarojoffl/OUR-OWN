@@ -1,6 +1,6 @@
 # forms.py
 from django import forms
-from .models import ContactMessage, Booking, BlogPost, FAQ, Testimonial
+from .models import ContactMessage, Booking, BlogPost, FAQ, Testimonial, About, Story
 from datetime import time
 from django.utils import timezone
 
@@ -61,4 +61,22 @@ class TestimonialForm(forms.ModelForm):
             'profession': forms.TextInput(attrs={'class': 'form-control'}),
             'content': forms.Textarea(attrs={'class': 'form-control', 'rows': 3}),
             'image': forms.ClearableFileInput(attrs={'class': 'form-control'}),
+        }
+
+class AboutForm(forms.ModelForm):
+    class Meta:
+        model = About
+        fields = ['experience_years', 'title', 'description', 'more_info', 'why_choose_us', 'image']
+        widgets = {
+            'description': forms.Textarea(attrs={'rows': 4}),
+            'more_info': forms.Textarea(attrs={'rows': 3}),
+            'why_choose_us': forms.Textarea(attrs={'rows': 3}),
+        }
+
+class StoryForm(forms.ModelForm):
+    class Meta:
+        model = Story
+        fields = ['date', 'title', 'description']
+        widgets = {
+            'description': forms.Textarea(attrs={'rows': 4}),
         }
