@@ -1,8 +1,13 @@
 {% extends 'admin_base.html' %}
+
 {% block title %}View Blog Posts{% endblock %}
+
 {% block content %}
-<div class="container mt-4">
-    <h3>Blog Posts</h3>
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h2>Blog Posts</h2>
+        <a href="{% url 'admin_add_blog_post' %}" class="btn btn-success">Add Blog Post</a>
+    </div>
+
     {% if messages %}
         {% for message in messages %}
             <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
@@ -11,10 +16,6 @@
             </div>
         {% endfor %}
     {% endif %}
-
-    <div class="text-end mb-3">
-        <a href="{% url 'admin_add_blog_post' %}" class="btn btn-success mb-3">Add Blog Post</a>
-    </div>
 
     <table class="table table-bordered table-striped">
         <thead>
@@ -29,19 +30,18 @@
         </thead>
         <tbody>
             {% for post in posts %}
-            <tr>
-                <td>{{ forloop.counter }}</td>
-                <td>{{ post.title }}</td>
-                <td>{{ post.category }}</td>
-                <td>{{ post.author }}</td>
-                <td>{{ post.publish_date }}</td>
-                <td>
-                    <a href="{% url 'admin_update_blog_post' post.id %}" class="btn btn-sm btn-warning">Update</a>
-                    <a href="{% url 'admin_delete_blog_post' post.id %}" class="btn btn-sm btn-danger">Delete</a>
-                </td>
-            </tr>
+                <tr>
+                    <td>{{ forloop.counter }}</td>
+                    <td>{{ post.title }}</td>
+                    <td>{{ post.category }}</td>
+                    <td>{{ post.author }}</td>
+                    <td>{{ post.publish_date }}</td>
+                    <td>
+                        <a href="{% url 'admin_update_blog_post' post.id %}" class="btn btn-sm btn-warning">Update</a>
+                        <a href="{% url 'admin_delete_blog_post' post.id %}" class="btn btn-sm btn-danger">Delete</a>
+                    </td>
+                </tr>
             {% endfor %}
         </tbody>
     </table>
-</div>
 {% endblock %}

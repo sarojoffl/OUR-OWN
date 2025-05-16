@@ -1,6 +1,6 @@
 # forms.py
 from django import forms
-from .models import ContactMessage, Booking, BlogPost, FAQ, Testimonial, About, Service
+from .models import ContactMessage, Booking, BlogPost, FAQ, Testimonial, About, Service, Feature
 from datetime import time
 from django.utils import timezone
 
@@ -75,4 +75,9 @@ class AboutForm(forms.ModelForm):
 class ServiceForm(forms.ModelForm):
     class Meta:
         model = Service
+        fields = ['title', 'description', 'image']
+
+class FeatureForm(forms.ModelForm):
+    class Meta:
+        model = Feature
         fields = ['title', 'description', 'image']

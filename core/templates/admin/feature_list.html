@@ -1,11 +1,11 @@
 {% extends 'admin_base.html' %}
-{% load static %}
-{% block title %}Services{% endblock %}
+
+{% block title %}Feature List{% endblock %}
 
 {% block content %}
     <div class="d-flex justify-content-between align-items-center mb-3">
-        <h2>Services</h2>
-        <a href="{% url 'add_service' %}" class="btn btn-success">Add Service</a>
+        <h2>Features</h2>
+        <a href="{% url 'add_feature' %}" class="btn btn-success">Add Feature</a>
     </div>
 
     {% if messages %}
@@ -22,26 +22,32 @@
             <tr>
                 <th>#</th>
                 <th>Title</th>
-                <th>Slug</th>
+                <th>Description</th>
                 <th>Image</th>
-                <th>Actions</th>
+                <th>Action</th>
             </tr>
         </thead>
         <tbody>
-            {% for service in services %}
+            {% for feature in features %}
                 <tr>
                     <td>{{ forloop.counter }}</td>
-                    <td>{{ service.title }}</td>
-                    <td>{{ service.slug }}</td>
+                    <td>{{ feature.title }}</td>
+                    <td>{{ feature.description }}</td>
                     <td>
-                        {% if service.image %}
-                            <img src="{{ service.image.url }}" width="100">
+                        {% if feature.image %}
+                            <img src="{{ feature.image.url }}" alt="{{ feature.title }}" width="100">
+                        {% else %}
+                            <span class="text-muted">No image</span>
                         {% endif %}
                     </td>
                     <td>
-                        <a href="{% url 'edit_service' service.pk %}" class="btn btn-warning btn-sm">Edit</a>
-                        <a href="{% url 'delete_service' service.pk %}" class="btn btn-danger btn-sm">Delete</a>
+                        <a href="{% url 'edit_feature' feature.id %}" class="btn btn-sm btn-warning">Edit</a>
+                        <a href="{% url 'delete_feature' feature.id %}" class="btn btn-sm btn-danger">Delete</a>
                     </td>
+                </tr>
+            {% empty %}
+                <tr>
+                    <td colspan="5" class="text-center">No features found.</td>
                 </tr>
             {% endfor %}
         </tbody>

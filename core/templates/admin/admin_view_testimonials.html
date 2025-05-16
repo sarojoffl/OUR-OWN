@@ -4,15 +4,19 @@
 {% block title %}Manage Testimonials{% endblock %}
 
 {% block content %}
-<h3>Testimonials</h3>
-    {% if messages %}
-        {% for message in messages %}
-            <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
-                {{ message }}
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-            </div>
-        {% endfor %}
-    {% endif %}
+<div class="d-flex justify-content-between align-items-center mb-3">
+    <h2>Testimonials</h2>
+    <a href="{% url 'admin_add_testimonial' %}" class="btn btn-success">Add Testimonial</a>
+</div>
+
+{% if messages %}
+    {% for message in messages %}
+        <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+            {{ message }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    {% endfor %}
+{% endif %}
 
 <table class="table table-bordered table-striped" id="testimonialsTable">
     <thead>
@@ -32,11 +36,14 @@
             <td>{{ testimonial.profession }}</td>
             <td>{{ testimonial.content|truncatewords:15 }}</td>
             <td>
+                <a href="{% url 'admin_update_testimonial' testimonial.id %}" class="btn btn-sm btn-warning">Update</a>
                 <a href="{% url 'admin_delete_testimonial' testimonial.id %}" class="btn btn-sm btn-danger">Delete</a>
             </td>
         </tr>
         {% empty %}
-        <tr><td colspan="4" class="text-center">No testimonials found.</td></tr>
+        <tr>
+            <td colspan="5" class="text-center">No testimonials found.</td>
+        </tr>
         {% endfor %}
     </tbody>
 </table>

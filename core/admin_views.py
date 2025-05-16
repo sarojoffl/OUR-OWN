@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from datetime import datetime
-from .models import Booking, Service, BlogPost, ContactMessage, FAQ, Testimonial, About
-from .forms import BlogPostForm, FAQForm, BookingStatusForm, AboutForm, ServiceForm
+from .models import Booking, Service, BlogPost, ContactMessage, FAQ, Testimonial, About, Feature
+from .forms import BlogPostForm, FAQForm, BookingStatusForm, AboutForm, ServiceForm, FeatureForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
@@ -52,6 +52,7 @@ def admin_delete_contact_message(request, message_id):
         return redirect('admin_contact_messages')
     return render(request, 'admin/delete_contact_message.html', {'message': message})
 
+# ---------- BLOG ----------
 def admin_add_blog_post(request):
     if request.method == "POST":
         form = BlogPostForm(request.POST, request.FILES)
@@ -61,7 +62,7 @@ def admin_add_blog_post(request):
             return redirect('admin_view_blog_posts')
     else:
         form = BlogPostForm()
-    return render(request, 'admin/add_blog_post.html', {'form': form})
+    return render(request, 'admin/blog_form.html', {'form': form, 'action': 'Add'})
 
 def admin_view_blog_posts(request):
     posts = BlogPost.objects.order_by('-publish_date')
@@ -77,7 +78,7 @@ def admin_update_blog_post(request, post_id):
             return redirect('admin_view_blog_posts')
     else:
         form = BlogPostForm(instance=post)
-    return render(request, 'admin/update_blog_post.html', {'form': form, 'post': post})
+    return render(request, 'admin/blog_form.html', {'form': form, 'post': post, 'action': 'Update'})
 
 def admin_delete_blog_post(request, post_id):
     post = get_object_or_404(BlogPost, id=post_id)
@@ -131,20 +132,24 @@ def admin_view_bookings(request):
 
 def admin_update_booking_status(request, booking_id):
     booking = get_object_or_404(Booking, id=booking_id)
-    
+
     if request.method == 'POST':
-        form = BookingStatusForm(request.POST, instance=booking)
-        if form.is_valid():
-            form.save()
-            
-            # Send email notification to customer
+        new_status = request.POST.get('status')
+        admin_comment = request.POST.get('admin_comment', '')
+
+        if new_status and new_status != booking.status:
+            booking.status = new_status
+            booking.admin_comment = admin_comment
+            booking.save()
+
             send_booking_status_email(booking)
-            
-            return redirect('admin_view_bookings')
-    else:
-        form = BookingStatusForm(instance=booking)
-        
-    return render(request, 'admin/update_booking_status.html', {'form': form, 'booking': booking})
+
+            messages.success(request, f"Booking status updated to '{booking.get_status_display()}' successfully.")
+
+        else:
+            messages.info(request, "No changes were made to the booking status.")
+
+        return redirect('admin_view_bookings')
 
 def send_booking_status_email(booking):
     subject = f"Update on Your Booking for {booking.booking_date.strftime('%Y-%m-%d %H:%M')}"
@@ -228,3 +233,39 @@ def delete_service(request, pk):
         messages.success(request, 'Service deleted successfully.')
         return redirect('admin_services')
     return render(request, 'admin/delete_service.html', {'service': service})
+
+# ---------- FEATURES ----------
+def admin_features(request):
+    features = Feature.objects.all()
+    return render(request, 'admin/feature_list.html', {'features': features})
+
+def add_feature(request):
+    if request.method == 'POST':
+        form = FeatureForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Feature added successfully.')
+            return redirect('admin_features')
+    else:
+        form = FeatureForm()
+    return render(request, 'admin/feature_form.html', {'form': form, 'action': 'Add'})
+
+def edit_feature(request, pk):
+    feature = get_object_or_404(Feature, pk=pk)
+    if request.method == 'POST':
+        form = FeatureForm(request.POST, request.FILES, instance=feature)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Feature updated successfully.')
+            return redirect('admin_features')
+    else:
+        form = FeatureForm(instance=feature)
+    return render(request, 'admin/feature_form.html', {'form': form, 'action': 'Edit', 'feature': feature})
+
+def delete_feature(request, pk):
+    feature = get_object_or_404(Feature, pk=pk)
+    if request.method == 'POST':
+        feature.delete()
+        messages.success(request, 'Feature deleted successfully.')
+        return redirect('admin_features')
+    return render(request, 'admin/delete_feature.html', {'feature': feature})

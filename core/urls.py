@@ -40,7 +40,7 @@ urlpatterns = [
 
     # Bookings
     path('dashboard/bookings/', admin_views.admin_view_bookings, name='admin_view_bookings'),
-    path('dashboard/bookings/update/<int:booking_id>/', admin_views.admin_update_booking_status, name='admin_update_booking_status'),
+    path('dashboard/bookings/update-status/<int:booking_id>/', admin_views.admin_update_booking_status, name='admin_update_booking_status'),
 
     # Testimonials
     path('dashboard/testimonials/', admin_views.admin_view_testimonials, name='admin_view_testimonials'),
@@ -55,6 +55,12 @@ urlpatterns = [
     path('dashboard/services/add/', admin_views.add_service, name='add_service'),
     path('dashboard/services/edit/<int:pk>/', admin_views.edit_service, name='edit_service'),
     path('dashboard/services/delete/<int:pk>/', admin_views.delete_service, name='delete_service'),
+
+    # Features
+    path('dashboard/features/', admin_views.admin_features, name='admin_features'),
+    path('dashboard/features/add/', admin_views.add_feature, name='add_feature'),
+    path('dashboard/features/edit/<int:pk>/', admin_views.edit_feature, name='edit_feature'),
+    path('dashboard/features/delete/<int:pk>/', admin_views.delete_feature, name='delete_feature'),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
