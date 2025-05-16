@@ -5,6 +5,7 @@ from . import views
 from . import admin_views
 
 urlpatterns = [
+    # Public Views
     path('', views.index, name='home'),
     path('about/', views.about, name='about'),
     path('services/', views.services, name='services'),
@@ -13,40 +14,47 @@ urlpatterns = [
     path('contact/', views.contact, name='contact'),
     path('blog/', views.blog, name='blog'),
     path('blog/<slug:slug>/', views.blog_detail, name='blog_detail'),
-    path('book-now/<int:plan_id>/', views.book_plan, name='book_now'),
+    path('book/', views.book_service, name='book_now'),
+
+
+    # Dashboard / Admin Views
     path('dashboard/', admin_views.admin_dashboard, name='admin_dashboard'),
-    path('login/', admin_views.admin_login, name='admin_login'),
-    path('logout/', admin_views.admin_logout, name='admin_logout'),
-    path('contact-messages/', admin_views.admin_contact_messages, name='admin_contact_messages'),
-    path('delete-contact-message/<int:message_id>/', admin_views.admin_delete_contact_message, name='admin_delete_contact_message'),
+    path('dashboard/login/', admin_views.admin_login, name='admin_login'),
+    path('dashboard/logout/', admin_views.admin_logout, name='admin_logout'),
+
+    # Contact Messages
+    path('dashboard/contact-messages/', admin_views.admin_contact_messages, name='admin_contact_messages'),
+    path('dashboard/contact-messages/delete/<int:message_id>/', admin_views.admin_delete_contact_message, name='admin_delete_contact_message'),
+
+    # Blog
     path('dashboard/blog/', admin_views.admin_view_blog_posts, name='admin_view_blog_posts'),
     path('dashboard/blog/add/', admin_views.admin_add_blog_post, name='admin_add_blog_post'),
     path('dashboard/blog/update/<int:post_id>/', admin_views.admin_update_blog_post, name='admin_update_blog_post'),
     path('dashboard/blog/delete/<int:post_id>/', admin_views.admin_delete_blog_post, name='admin_delete_blog_post'),
+
+    # FAQ
     path('dashboard/faq/', admin_views.admin_view_faqs, name='admin_view_faqs'),
     path('dashboard/faq/add/', admin_views.admin_add_faq, name='admin_add_faq'),
     path('dashboard/faq/update/<int:faq_id>/', admin_views.admin_update_faq, name='admin_update_faq'),
     path('dashboard/faq/delete/<int:faq_id>/', admin_views.admin_delete_faq, name='admin_delete_faq'),
+
+    # Bookings
     path('dashboard/bookings/', admin_views.admin_view_bookings, name='admin_view_bookings'),
     path('dashboard/bookings/update/<int:booking_id>/', admin_views.admin_update_booking_status, name='admin_update_booking_status'),
+
+    # Testimonials
     path('dashboard/testimonials/', admin_views.admin_view_testimonials, name='admin_view_testimonials'),
     path('dashboard/testimonials/delete/<int:testimonial_id>/', admin_views.admin_delete_testimonial, name='admin_delete_testimonial'),
-    
+
     # About
     path('dashboard/about/', admin_views.admin_about_view, name='admin_about_view'),
     path('dashboard/about/edit/', admin_views.edit_about, name='edit_about'),
 
-    # Story
-    path('dashboard/stories/', admin_views.admin_story_list, name='admin_story_list'),
-    path('dashboard/stories/add/', admin_views.add_story, name='add_story'),
-    path('dashboard/stories/edit/<int:pk>/', admin_views.edit_story, name='edit_story'),
-    path('dashboard/stories/delete/<int:pk>/', admin_views.delete_story, name='delete_story'),
-
-    # Team
-    path('team/', admin_views.team_list, name='team_list'),
-    path('team/add/', admin_views.add_team_member, name='add_team_member'),
-    path('team/edit/<int:pk>/', admin_views.edit_team_member, name='edit_team_member'),
-    path('team/delete/<int:pk>/', admin_views.delete_team_member, name='delete_team_member'),
+    # Services
+    path('dashboard/services/', admin_views.admin_services, name='admin_services'),
+    path('dashboard/services/add/', admin_views.add_service, name='add_service'),
+    path('dashboard/services/edit/<int:pk>/', admin_views.edit_service, name='edit_service'),
+    path('dashboard/services/delete/<int:pk>/', admin_views.delete_service, name='delete_service'),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

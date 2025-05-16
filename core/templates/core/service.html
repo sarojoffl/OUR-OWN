@@ -77,48 +77,4 @@
 </div>
 <!-- Feature End -->
 
-<!-- Pricing Plan Start -->
-<div class="price">
-    <div class="container">
-        <div class="section-header">
-            <p>Pricing Plan</p>
-            <h2>No Extra Hidden Charges</h2>
-        </div>
-        <div class="row">
-            {% for plan in pricing_plans %}
-            <div class="col-md-4">
-                <div class="price-item {% if plan.is_featured %}featured-item{% endif %}">
-                    <div class="price-header">
-                        <div class="price-icon">
-                            <i class="fa {{ plan.icon }}"></i>
-                        </div>
-                        <div class="price-title">
-                            <h2>{{ plan.name }}</h2>
-                        </div>
-                        <div class="price-pricing">
-                            <h2><small>$</small>{{ plan.price }}</h2>
-                        </div>
-                    </div>
-                    <div class="price-body">
-                        <div class="price-des">
-                            <ul>
-                                {% for item in plan.feature_list %}
-                                <li>{{ item }}</li>
-                                {% endfor %}
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="price-footer">
-                        <div class="price-action">
-                            <a href="{% url 'book_now' plan.id %}"><i class="fa fa-shopping-cart"></i>Book Now</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            {% endfor %}
-        </div>
-    </div>
-</div>
-<!-- Pricing Plan End -->
-
 {% endblock %}

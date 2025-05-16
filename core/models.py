@@ -49,19 +49,6 @@ class Feature(models.Model):
     def __str__(self):
         return self.title
 
-class PricingPlan(models.Model):
-    name = models.CharField(max_length=100)
-    price = models.DecimalField(max_digits=10, decimal_places=2)
-    icon = models.CharField(max_length=50)  # e.g. 'fa-home', 'fa-star'
-    is_featured = models.BooleanField(default=False)
-    features = models.TextField(help_text="One feature per line")
-
-    def feature_list(self):
-        return self.features.strip().split('\n')
-
-    def __str__(self):
-        return self.name
-
 class About(models.Model):
     experience_years = models.PositiveIntegerField(default=0)
     title = models.CharField(max_length=255)
@@ -69,20 +56,6 @@ class About(models.Model):
     more_info = models.TextField()
     image = models.ImageField(upload_to='about/')
     why_choose_us = models.TextField(blank=True, null=True)
-
-class Story(models.Model):
-    date = models.DateField()
-    title = models.CharField(max_length=255)
-    description = models.TextField()
-
-class TeamMember(models.Model):
-    name = models.CharField(max_length=100)
-    role = models.CharField(max_length=100)
-    image = models.ImageField(upload_to='team/')
-    twitter = models.URLField(blank=True)
-    facebook = models.URLField(blank=True)
-    linkedin = models.URLField(blank=True)
-    instagram = models.URLField(blank=True)
 
 class FAQ(models.Model):
     question = models.CharField(max_length=255)
@@ -121,9 +94,10 @@ class Booking(models.Model):
     name = models.CharField(max_length=100)
     email = models.EmailField()
     phone = models.CharField(max_length=15, blank=True)
-    plan = models.ForeignKey('PricingPlan', on_delete=models.CASCADE)
+    service = models.ForeignKey(Service, on_delete=models.CASCADE)
     booking_date = models.DateTimeField()
     booked_on = models.DateTimeField(auto_now_add=True)
+
     STATUS_CHOICES = [
         ('pending', 'Pending'),
         ('accepted', 'Accepted'),

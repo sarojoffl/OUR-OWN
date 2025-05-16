@@ -37,6 +37,19 @@
                     </div>
 
                     <div class="form-group">
+                        <label for="id_service">Service</label>
+                        <select name="service" id="id_service" class="form-control">
+                            <option value="">---------</option>
+                            {% for service in form.fields.service.queryset %}
+                                <option value="{{ service.id }}" {% if form.service.value|stringformat:"s" == service.id|stringformat:"s" %}selected{% endif %}>{{ service.name }}</option>
+                            {% endfor %}
+                        </select>
+                        {% if form.service.errors %}
+                            <div class="text-danger small">{{ form.service.errors|striptags }}</div>
+                        {% endif %}
+                    </div>
+
+                    <div class="form-group">
                         <label for="id_booking_date">Booking Date</label>
                         <input type="datetime-local" name="booking_date" class="form-control" id="id_booking_date"
                                value="{{ form.booking_date.value|default:'' }}">
@@ -45,9 +58,6 @@
                         {% endif %}
                         <span class="text-muted small">Please select a date and time between 10:00 AM and 6:00 PM.</span>
                     </div>
-
-                    <!-- Hidden plan field -->
-                    <input type="hidden" name="plan" value="{{ form.plan.value }}">
 
                     <div class="text-center">
                         <button type="submit" class="btn btn-success btn-lg mt-4">Confirm Booking</button>
@@ -58,14 +68,13 @@
     </div>
 </form>
 
-
 <script>
     const input = document.getElementById("id_booking_date");
 
     // Set minimum date-time to current time rounded up to next full minute
     const now = new Date();
-    now.setMinutes(now.getMinutes() + 1); // Round up to avoid invalid input
-    input.min = now.toISOString().slice(0,16); // Format for datetime-local
+    now.setMinutes(now.getMinutes() + 1);
+    input.min = now.toISOString().slice(0,16);
 
     input.addEventListener('change', function () {
         const selected = new Date(this.value);
@@ -73,7 +82,7 @@
 
         if (hour < 10 || hour >= 18) {
             alert("Please choose a time between 10:00 AM and 6:00 PM.");
-            this.value = "";  // Reset invalid value
+            this.value = "";
         }
     });
 </script>

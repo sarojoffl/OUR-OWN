@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from datetime import datetime
-from .models import Booking, Service, BlogPost, ContactMessage, FAQ, Testimonial, About, Story, TeamMember
-from .forms import BlogPostForm, FAQForm, BookingStatusForm, AboutForm, StoryForm, TeamMemberForm
+from .models import Booking, Service, BlogPost, ContactMessage, FAQ, Testimonial, About
+from .forms import BlogPostForm, FAQForm, BookingStatusForm, AboutForm, ServiceForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
@@ -193,75 +193,38 @@ def edit_about(request):
         form = AboutForm(instance=about)
     return render(request, 'admin/about_form.html', {'form': form})
 
+# ---------- SERVICES ----------
+def admin_services(request):
+    services = Service.objects.all()
+    return render(request, 'admin/service_list.html', {'services': services})
 
-# ---------- STORY ----------
-def admin_story_list(request):
-    stories = Story.objects.all()
-    return render(request, 'admin/story_list.html', {'stories': stories})
-
-def add_story(request):
+def add_service(request):
     if request.method == 'POST':
-        form = StoryForm(request.POST)
+        form = ServiceForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()
-            messages.success(request, "Story added successfully.")
-            return redirect('admin_story_list')
+            messages.success(request, 'Service added successfully.')
+            return redirect('admin_services')
     else:
-        form = StoryForm()
-    return render(request, 'admin/story_form.html', {'form': form, 'action': 'Add'})
+        form = ServiceForm()
+    return render(request, 'admin/service_form.html', {'form': form, 'action': 'Add'})
 
-def edit_story(request, pk):
-    story = get_object_or_404(Story, pk=pk)
+def edit_service(request, pk):
+    service = get_object_or_404(Service, pk=pk)
     if request.method == 'POST':
-        form = StoryForm(request.POST, instance=story)
+        form = ServiceForm(request.POST, request.FILES, instance=service)
         if form.is_valid():
             form.save()
-            messages.success(request, "Story updated successfully.")
-            return redirect('admin_story_list')
+            messages.success(request, 'Service updated successfully.')
+            return redirect('admin_services')
     else:
-        form = StoryForm(instance=story)
-    return render(request, 'admin/story_form.html', {'form': form, 'action': 'Edit'})
+        form = ServiceForm(instance=service)
+    return render(request, 'admin/service_form.html', {'form': form, 'action': 'Edit', 'service': service})
 
-def delete_story(request, pk):
-    story = get_object_or_404(Story, pk=pk)
+def delete_service(request, pk):
+    service = get_object_or_404(Service, pk=pk)
     if request.method == 'POST':
-        story.delete()
-        messages.success(request, "Story deleted.")
-        return redirect('admin_story_list')
-    return render(request, 'admin/story_delete.html', {'story': story})
-
-# ---------- TEAM ----------
-def team_list(request):
-    members = TeamMember.objects.all()
-    return render(request, 'admin/team_list.html', {'members': members})
-
-def add_team_member(request):
-    if request.method == 'POST':
-        form = TeamMemberForm(request.POST, request.FILES)
-        if form.is_valid():
-            form.save()
-            messages.success(request, "Team member added successfully.")
-            return redirect('team_list')
-    else:
-        form = TeamMemberForm()
-    return render(request, 'admin/team_form.html', {'form': form, 'action': 'Add'})
-
-def edit_team_member(request, pk):
-    member = get_object_or_404(TeamMember, pk=pk)
-    if request.method == 'POST':
-        form = TeamMemberForm(request.POST, request.FILES, instance=member)
-        if form.is_valid():
-            form.save()
-            messages.success(request, "Team member updated successfully.")
-            return redirect('team_list')
-    else:
-        form = TeamMemberForm(instance=member)
-    return render(request, 'admin/team_form.html', {'form': form, 'action': 'Edit'})
-
-def delete_team_member(request, pk):
-    member = get_object_or_404(TeamMember, pk=pk)
-    if request.method == 'POST':
-        member.delete()
-        messages.success(request, "Team member deleted successfully.")
-        return redirect('team_list')
-    return render(request, 'admin/team_confirm_delete.html', {'member': member})
+        service.delete()
+        messages.success(request, 'Service deleted successfully.')
+        return redirect('admin_services')
+    return render(request, 'admin/delete_service.html', {'service': service})

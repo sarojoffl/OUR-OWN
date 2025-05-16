@@ -9,7 +9,7 @@
                 <th>#</th>
                 <th>Name</th>
                 <th>Email</th>
-                <th>Plan</th>
+                <th>Service</th>
                 <th>Booking Date</th>
                 <th>Status</th>
                 <th>Booked On</th>
@@ -22,7 +22,7 @@
                 <td>{{ forloop.counter }}</td>
                 <td>{{ booking.name }}</td>
                 <td>{{ booking.email }}</td>
-                <td>{{ booking.plan }}</td>
+                <td>{{ booking.service.title }}</td>
                 <td>{{ booking.booking_date }}</td>
                 <td>
                     <span class="badge 

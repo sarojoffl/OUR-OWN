@@ -98,38 +98,6 @@
 </div>
 <!-- Feature End -->
 
-<!-- Team Start -->
-<div class="team">
-    <div class="container">
-        <div class="section-header">
-            <p>Team Member</p>
-            <h2>Meet Our Expert Cleaners</h2>
-        </div>
-        <div class="row">
-            {% for member in team_members %}
-            <div class="col-lg-3 col-md-6">
-                <div class="team-item">
-                    <div class="team-img">
-                        <img src="{{ member.image.url }}" alt="{{ member.name }}">
-                    </div>
-                    <div class="team-text">
-                        <h2>{{ member.name }}</h2>
-                        <h3>{{ member.role }}</h3>
-                        <div class="team-social">
-                            {% if member.twitter %}<a class="social-tw" href="{{ member.twitter }}"><i class="fab fa-twitter"></i></a>{% endif %}
-                            {% if member.facebook %}<a class="social-fb" href="{{ member.facebook }}"><i class="fab fa-facebook-f"></i></a>{% endif %}
-                            {% if member.linkedin %}<a class="social-li" href="{{ member.linkedin }}"><i class="fab fa-linkedin-in"></i></a>{% endif %}
-                            {% if member.instagram %}<a class="social-in" href="{{ member.instagram }}"><i class="fab fa-instagram"></i></a>{% endif %}
-                        </div>
-                    </div>
-                </div>
-            </div>
-            {% endfor %}
-        </div>
-    </div>
-</div>
-<!-- Team End -->
-
 <!-- FAQs Start -->
 <div class="faqs">
     <div class="container">
@@ -164,50 +132,6 @@
     </div>
 </div>
 <!-- FAQs End -->
-
-<!-- Pricing Plan Start -->
-<div class="price">
-    <div class="container">
-        <div class="section-header">
-            <p>Pricing Plan</p>
-            <h2>No Extra Hidden Charges</h2>
-        </div>
-        <div class="row">
-            {% for plan in pricing_plans %}
-            <div class="col-md-4">
-                <div class="price-item {% if plan.is_featured %}featured-item{% endif %}">
-                    <div class="price-header">
-                        <div class="price-icon">
-                            <i class="fa {{ plan.icon }}"></i>
-                        </div>
-                        <div class="price-title">
-                            <h2>{{ plan.name }}</h2>
-                        </div>
-                        <div class="price-pricing">
-                            <h2><small>$</small>{{ plan.price|floatformat:0 }}</h2>
-                        </div>
-                    </div>
-                    <div class="price-body">
-                        <div class="price-des">
-                            <ul>
-                                {% for feature in plan.feature_list %}
-                                <li>{{ feature }}</li>
-                                {% endfor %}
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="price-footer">
-                        <div class="price-action">
-                            <a href=""><i class="fa fa-shopping-cart"></i>Book Now</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            {% endfor %}
-        </div>
-    </div>
-</div>
-<!-- Pricing Plan End -->
 
 <!-- Testimonial Start -->
 <div class="testimonial">

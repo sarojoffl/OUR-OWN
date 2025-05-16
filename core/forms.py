@@ -1,6 +1,6 @@
 # forms.py
 from django import forms
-from .models import ContactMessage, Booking, BlogPost, FAQ, Testimonial, About, Story, TeamMember
+from .models import ContactMessage, Booking, BlogPost, FAQ, Testimonial, About, Service
 from datetime import time
 from django.utils import timezone
 
@@ -18,11 +18,10 @@ class ContactForm(forms.ModelForm):
 class BookingForm(forms.ModelForm):
     class Meta:
         model = Booking
-        fields = ['name', 'email', 'phone', 'booking_date', 'plan']
+        fields = ['name', 'email', 'phone', 'service', 'booking_date']
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.fields['plan'].widget = forms.HiddenInput()
         self.fields['booking_date'].widget = forms.DateTimeInput(attrs={'type': 'datetime-local'})
 
     def clean_booking_date(self):
@@ -73,15 +72,7 @@ class AboutForm(forms.ModelForm):
             'why_choose_us': forms.Textarea(attrs={'rows': 3}),
         }
 
-class StoryForm(forms.ModelForm):
+class ServiceForm(forms.ModelForm):
     class Meta:
-        model = Story
-        fields = ['date', 'title', 'description']
-        widgets = {
-            'description': forms.Textarea(attrs={'rows': 4}),
-        }
-
-class TeamMemberForm(forms.ModelForm):
-    class Meta:
-        model = TeamMember
-        fields = '__all__'
+        model = Service
+        fields = ['title', 'description', 'image']

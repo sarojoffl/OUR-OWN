@@ -1,0 +1,10 @@
+{% extends 'admin_base.html' %}
+{% block content %}
+<h2>Delete Service</h2>
+<p>Are you sure you want to delete "{{ service.title }}"?</p>
+<form method="post">
+    {% csrf_token %}
+    <button type="submit" class="btn btn-danger">Yes, Delete</button>
+    <a href="{% url 'admin_services' %}" class="btn btn-secondary">Cancel</a>
+</form>
+{% endblock %}
