@@ -3,13 +3,21 @@
 {% block title %}Delete Testimonial{% endblock %}
 
 {% block content %}
-<div class="container">
-    <h1 class="mb-4 text-danger">Delete Testimonial</h1>
-    <p>Are you sure you want to delete the testimonial from <strong>{{ testimonial.customer_name }}</strong>?</p>
-    <form method="post">
-        {% csrf_token %}
-        <button type="submit" class="btn btn-danger">Yes, Delete</button>
-        <a href="{% url 'admin_view_testimonials' %}" class="btn btn-secondary ms-2">Cancel</a>
-    </form>
+<div class="container mt-5">
+    <div class="card shadow-sm">
+        <div class="card-header bg-danger text-white">
+            <h5 class="mb-0">Confirm Deletion</h5>
+        </div>
+        <div class="card-body">
+            <p>Are you sure you want to delete the testimonial from <strong>{{ testimonial.customer_name }}</strong>?</p>
+            <form method="post">
+                {% csrf_token %}
+                <div class="d-flex justify-content-center gap-3">
+                    <a href="{% url 'admin_view_testimonials' %}" class="btn btn-secondary">Cancel</a>
+                    <button type="submit" class="btn btn-danger">Yes, Delete</button>
+                </div>
+            </form>
+        </div>
+    </div>
 </div>
 {% endblock %}

@@ -44,6 +44,8 @@ urlpatterns = [
 
     # Testimonials
     path('dashboard/testimonials/', admin_views.admin_view_testimonials, name='admin_view_testimonials'),
+    path('dashboard/testimonials/add/', admin_views.admin_add_testimonial, name='admin_add_testimonial'),
+    path('dashboard/testimonials/update/<int:testimonial_id>/', admin_views.admin_update_testimonial, name='admin_update_testimonial'),
     path('dashboard/testimonials/delete/<int:testimonial_id>/', admin_views.admin_delete_testimonial, name='admin_delete_testimonial'),
 
     # About

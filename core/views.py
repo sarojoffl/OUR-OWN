@@ -94,4 +94,8 @@ def book_service(request):
             return render(request, 'core/booking_confirmation.html', {'booking': booking})
     else:
         form = BookingForm()
-    return render(request, 'core/book_now.html', {'form': form})
+
+    # Fetch all services to display in the booking form
+    services = Service.objects.all()
+
+    return render(request, 'core/book_now.html', {'form': form, 'services': services})

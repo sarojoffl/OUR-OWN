@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Service, Feature, Project, ContactMessage, About, FAQ, Testimonial, BlogPost
+from .models import Service, Feature, Project, ContactMessage, About, FAQ, Testimonial, BlogPost, Booking
 
 admin.site.register(Service)
 admin.site.register(Feature)
@@ -9,3 +9,4 @@ admin.site.register(About)
 admin.site.register(FAQ)
 admin.site.register(Testimonial)
 admin.site.register(BlogPost)
+admin.site.register(Booking)

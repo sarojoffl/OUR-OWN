@@ -13,22 +13,21 @@
                 <div class="card-body">
                     <div class="list-group">
                         <p class="list-group-item">
-                            <strong>Name: </strong> {{ customer.name }}
+                            <strong>Name: </strong> {{ booking.name }}
                         </p>
                         <p class="list-group-item">
-                            <strong>Email: </strong> {{ customer.email }}
+                            <strong>Email: </strong> {{ booking.email }}
                         </p>
                         <p class="list-group-item">
-                            <strong>Phone: </strong> {{ customer.phone }}
+                            <strong>Phone: </strong> {{ booking.phone }}
                         </p>
                         <p class="list-group-item">
-                            <strong>Service Plan: </strong> {{ customer.plan.name }}
+                            <strong>Service: </strong> {{ booking.service.title }}
                         </p>
                         <p class="list-group-item">
-                            <strong>Booking Date: </strong> {{ customer.booking_date }}
+                            <strong>Booking Date: </strong> {{ booking.booking_date }}
                         </p>
                     </div>
-
                 </div>
             </div>
         </div>

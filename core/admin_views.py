@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from datetime import datetime
 from .models import Booking, Service, BlogPost, ContactMessage, FAQ, Testimonial, About, Feature
-from .forms import BlogPostForm, FAQForm, BookingStatusForm, AboutForm, ServiceForm, FeatureForm
+from .forms import BlogPostForm, FAQForm, BookingStatusForm, AboutForm, ServiceForm, FeatureForm, TestimonialForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
@@ -10,6 +10,7 @@ from django.shortcuts import get_object_or_404
 from django.core.mail import EmailMultiAlternatives
 from django.template.loader import render_to_string
 
+# ---------- DASHBOARD ----------
 @login_required
 def admin_dashboard(request):
     context = {
@@ -17,9 +18,13 @@ def admin_dashboard(request):
         'total_services': Service.objects.count(),
         'total_blogs': BlogPost.objects.count(),
         'total_messages': ContactMessage.objects.count(),
+        'total_faqs': FAQ.objects.count(),
+        'total_testimonials': Testimonial.objects.count(),
+        'total_features': Feature.objects.count(),
+        'recent_bookings': Booking.objects.order_by('-booked_on')[:5],
+        'recent_messages': ContactMessage.objects.order_by('-created_at')[:5],
         'current_year': datetime.now().year,
     }
-
     return render(request, 'admin/dashboard.html', context)
 
 def admin_login(request):
@@ -40,6 +45,7 @@ def admin_logout(request):
     logout(request)
     return redirect('home')
 
+# ---------- CONTACT MESSAGES ----------
 def admin_contact_messages(request):
     contact_messages = ContactMessage.objects.order_by('-created_at')
     return render(request, 'admin/contact_messages.html', {'contact_messages': contact_messages})
@@ -88,6 +94,7 @@ def admin_delete_blog_post(request, post_id):
         return redirect('admin_view_blog_posts')
     return render(request, 'admin/delete_blog_post.html', {'post': post})
 
+# ---------- FAQ ----------
 def admin_view_faq(request):
     return render(request, 'admin/faq.html')
 
@@ -126,6 +133,7 @@ def admin_delete_faq(request, faq_id):
         return redirect('admin_view_faqs')
     return render(request, 'admin/faq_confirm_delete.html', {'faq': faq})
 
+# ---------- BOOKINGS ----------
 def admin_view_bookings(request):
     bookings = Booking.objects.all().order_by('-booked_on')
     return render(request, 'admin/view_bookings.html', {'bookings': bookings})
@@ -168,9 +176,33 @@ def send_booking_status_email(booking):
     email.attach_alternative(html_content, "text/html")
     email.send()
 
+# ---------- TESTIMONIALS ----------
 def admin_view_testimonials(request):
     testimonials = Testimonial.objects.all()
     return render(request, 'admin/admin_view_testimonials.html', {'testimonials': testimonials})
+
+def admin_add_testimonial(request):
+    if request.method == 'POST':
+        form = TestimonialForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            messages.success(request, "Testimonial added successfully.")
+            return redirect('admin_view_testimonials')
+    else:
+        form = TestimonialForm()
+    return render(request, 'admin/testimonial_form.html', {'form': form, 'action': 'Add'})
+
+def admin_update_testimonial(request, testimonial_id):
+    testimonial = get_object_or_404(Testimonial, id=testimonial_id)
+    if request.method == 'POST':
+        form = TestimonialForm(request.POST, request.FILES, instance=testimonial)
+        if form.is_valid():
+            form.save()
+            messages.success(request, "Testimonial updated successfully.")
+            return redirect('admin_view_testimonials')
+    else:
+        form = TestimonialForm(instance=testimonial)
+    return render(request, 'admin/testimonial_form.html', {'form': form, 'testimonial': testimonial, 'action': 'Update'})
 
 def admin_delete_testimonial(request, testimonial_id):
     testimonial = get_object_or_404(Testimonial, id=testimonial_id)

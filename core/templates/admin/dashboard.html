@@ -7,44 +7,181 @@
 <p>Welcome, {{ request.user.first_name|default:request.user.username }}!</p>
 
 <div class="row mt-4">
-    <!-- Total Bookings -->
-    <div class="col-md-3">
-        <div class="card text-white bg-primary mb-3">
-            <div class="card-body">
-                <h5 class="card-title">Total Bookings</h5>
-                <p class="card-text fs-4">{{ total_bookings }}</p>
-            </div>
-        </div>
-    </div>
 
-    <!-- Services Offered -->
-    <div class="col-md-3">
-        <div class="card text-white bg-success mb-3">
-            <div class="card-body">
-                <h5 class="card-title">Services</h5>
-                <p class="card-text fs-4">{{ total_services }}</p>
-            </div>
+  <!-- Total Bookings -->
+  <div class="col-md-3">
+    <div class="card text-white bg-primary mb-3">
+      <div class="card-body">
+        <div class="d-flex justify-content-between align-items-center">
+          <h5 class="card-title mb-0">Total Bookings</h5>
+          <p class="card-text fs-4 mb-0">{{ total_bookings }}</p>
         </div>
+      </div>
+      <div class="card-footer d-flex align-items-center justify-content-between">
+        <a class="small text-white stretched-link" href="{% url 'admin_view_bookings' %}">View Details</a>
+        <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+      </div>
     </div>
+  </div>
 
-    <!-- Blog Posts -->
-    <div class="col-md-3">
-        <div class="card text-dark bg-warning mb-3">
-            <div class="card-body">
-                <h5 class="card-title">Blog Posts</h5>
-                <p class="card-text fs-4">{{ total_blogs }}</p>
-            </div>
+  <!-- Services -->
+  <div class="col-md-3">
+    <div class="card text-white bg-success mb-3">
+      <div class="card-body">
+        <div class="d-flex justify-content-between align-items-center">
+          <h5 class="card-title mb-0">Services</h5>
+          <p class="card-text fs-4 mb-0">{{ total_services }}</p>
         </div>
+      </div>
+      <div class="card-footer d-flex align-items-center justify-content-between">
+        <a class="small text-white stretched-link" href="{% url 'admin_services' %}">View Details</a>
+        <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+      </div>
     </div>
+  </div>
 
-    <!-- Contact Messages -->
-    <div class="col-md-3">
-        <div class="card text-white bg-danger mb-3">
-            <div class="card-body">
-                <h5 class="card-title">Messages</h5>
-                <p class="card-text fs-4">{{ total_messages }}</p>
-            </div>
+  <!-- Features -->
+  <div class="col-md-3">
+    <div class="card text-white bg-info mb-3">
+      <div class="card-body">
+        <div class="d-flex justify-content-between align-items-center">
+          <h5 class="card-title mb-0">Features</h5>
+          <p class="card-text fs-4 mb-0">{{ total_features }}</p>
         </div>
+      </div>
+      <div class="card-footer d-flex align-items-center justify-content-between">
+        <a class="small text-white stretched-link" href="{% url 'admin_features' %}">View Details</a>
+        <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+      </div>
     </div>
+  </div>
+
+  <!-- Blog Posts -->
+  <div class="col-md-3">
+    <div class="card text-dark bg-warning mb-3">
+      <div class="card-body">
+        <div class="d-flex justify-content-between align-items-center">
+          <h5 class="card-title mb-0">Blog Posts</h5>
+          <p class="card-text fs-4 mb-0">{{ total_blogs }}</p>
+        </div>
+      </div>
+      <div class="card-footer d-flex align-items-center justify-content-between">
+        <a class="small text-dark stretched-link" href="{% url 'admin_view_blog_posts' %}">View Details</a>
+        <div class="small text-dark"><i class="fas fa-angle-right"></i></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Contact Messages -->
+  <div class="col-md-3">
+    <div class="card text-white bg-danger mb-3">
+      <div class="card-body">
+        <div class="d-flex justify-content-between align-items-center">
+          <h5 class="card-title mb-0">Messages</h5>
+          <p class="card-text fs-4 mb-0">{{ total_messages }}</p>
+        </div>
+      </div>
+      <div class="card-footer d-flex align-items-center justify-content-between">
+        <a class="small text-white stretched-link" href="{% url 'admin_contact_messages' %}">View Details</a>
+        <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Testimonials -->
+  <div class="col-md-3">
+    <div class="card text-white bg-dark mb-3">
+      <div class="card-body">
+        <div class="d-flex justify-content-between align-items-center">
+          <h5 class="card-title mb-0">Testimonials</h5>
+          <p class="card-text fs-4 mb-0">{{ total_testimonials }}</p>
+        </div>
+      </div>
+      <div class="card-footer d-flex align-items-center justify-content-between">
+        <a class="small text-white stretched-link" href="{% url 'admin_view_testimonials' %}">View Details</a>
+        <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FAQs -->
+  <div class="col-md-3">
+    <div class="card text-white bg-secondary mb-3">
+      <div class="card-body">
+        <div class="d-flex justify-content-between align-items-center">
+          <h5 class="card-title mb-0">FAQs</h5>
+          <p class="card-text fs-4 mb-0">{{ total_faqs }}</p>
+        </div>
+      </div>
+      <div class="card-footer d-flex align-items-center justify-content-between">
+        <a class="small text-white stretched-link" href="{% url 'admin_view_faqs' %}">View Details</a>
+        <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div class="row">
+  <!-- Recent Bookings -->
+  <div class="col-xl-6">
+    <div class="card mb-4">
+      <div class="card-header">
+        <i class="fas fa-calendar-check me-1"></i>
+        Recent Bookings
+      </div>
+      <div class="card-body">
+        {% if recent_bookings %}
+        <div class="table-responsive">
+          <table class="table table-bordered table-striped">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Customer</th>
+                <th>Date</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for booking in recent_bookings %}
+              <tr>
+                <td>{{ forloop.counter }}</td>
+                <td>{{ booking.name }}</td>
+                <td>{{ booking.booking_date|date:"M d, Y" }}</td>
+                <td>{{ booking.status }}</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+        {% else %}
+        <p class="mb-0">No recent bookings.</p>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+
+  <!-- Recent Messages -->
+  <div class="col-xl-6">
+    <div class="card mb-4">
+      <div class="card-header">
+        <i class="fas fa-envelope me-1"></i>
+        Recent Messages
+      </div>
+      <div class="card-body">
+        {% if recent_messages %}
+        <ul class="list-group">
+          {% for message in recent_messages %}
+          <li class="list-group-item">
+            <strong>{{ message.name }}</strong>: {{ message.message|truncatewords:10 }}
+          </li>
+          {% endfor %}
+        </ul>
+        {% else %}
+        <p class="mb-0">No new messages.</p>
+        {% endif %}
+      </div>
+    </div>
+  </div>
 </div>
 {% endblock %}
