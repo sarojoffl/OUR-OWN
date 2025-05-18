@@ -17,7 +17,7 @@
                 <h1 class="display-1 text-capitalize text-white mb-4">Premium Hospitality Services</h1>
                 <p class="mb-5 fs-5">Delivering exceptional experiences and guest satisfaction with top-tier hospitality solutions.</p>
                 <a class="btn btn-primary rounded-pill py-3 px-5 mb-4 me-4" href="{% url 'services' %}">Learn More</a>
-                <a class="btn btn-dark rounded-pill py-3 px-5 mb-4" href="#">Contact Us</a>
+                <a class="btn btn-dark rounded-pill py-3 px-5 mb-4" href="{% url 'contact' %}">Contact Us</a>
             </div>
         </div>
     </div>
@@ -32,7 +32,7 @@
                 <h1 class="display-1 text-capitalize text-white mb-4">Reliable Construction Services</h1>
                 <p class="mb-5 fs-5">From foundation to finish, we build with quality, safety, and excellence in every project.</p>
                 <a class="btn btn-primary rounded-pill py-3 px-5 mb-4 me-4" href="{% url 'services' %}">Learn More</a>
-                <a class="btn btn-dark rounded-pill py-3 px-5 mb-4" href="#">Contact Us</a>
+                <a class="btn btn-dark rounded-pill py-3 px-5 mb-4" href="{% url 'contact' %}">Contact Us</a>
             </div>
         </div>
     </div>
@@ -47,7 +47,7 @@
                 <h1 class="display-1 text-capitalize text-white mb-4">Trusted Cleaning Services</h1>
                 <p class="mb-5 fs-5">Professional cleaning for homes, offices, and businesses with over a decade of expertise.</p>
                 <a class="btn btn-primary rounded-pill py-3 px-5 mb-4 me-4" href="{% url 'services' %}">Learn More</a>
-                <a class="btn btn-dark rounded-pill py-3 px-5 mb-4" href="#">Contact Us</a>
+                <a class="btn btn-dark rounded-pill py-3 px-5 mb-4" href="{% url 'contact' %}">Contact Us</a>
             </div>
         </div>
     </div>
@@ -98,7 +98,7 @@
         </div>
 
         <div class="text-center">
-            <a class="btn btn-primary" href="{% url 'services' %}">View All Services</a>
+            <a class="btn btn-yellow" href="{% url 'services' %}">View All Services</a>
         </div>
 
     </div>
@@ -223,7 +223,7 @@
             {% endfor %}
         </div>
         <div class="text-center mt-4">
-            <a class="btn btn-primary" href="{% url 'blog' %}">View All Blogs</a>
+            <a class="btn btn-yellow" href="{% url 'blog' %}">View All Blogs</a>
         </div>
     </div>
 </div>

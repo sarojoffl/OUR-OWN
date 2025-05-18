@@ -104,7 +104,3 @@ def book_service(request):
     faqs = FAQ.objects.all()
 
     return render(request, 'core/book_now.html', {'form': form, 'services': services, 'faqs': faqs})
-
-def test(request):
-    # This is a placeholder function for the test view
-    return render(request, 'core/test.html')
