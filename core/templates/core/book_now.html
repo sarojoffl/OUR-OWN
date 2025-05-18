@@ -1,103 +1,134 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load widget_tweaks %}
 
 {% block title %}Book Now{% endblock %}
 
 {% block content %}
-
-<form method="POST" class="container py-5">
-    {% csrf_token %}
-    <div class="row justify-content-center">
-
-        <!-- Left side: info, instructions, or image -->
-        <div class="col-md-6">
-            <div class="p-4">
-                <h3>Welcome to Our Booking Service</h3>
-                <p>
-                    We are committed to providing you with the highest quality services tailored to meet your individual needs. Whether you're looking for a relaxing experience, professional consultation, or any specialized service, our expert team is here to help you every step of the way.
-                </p>
-                <p>
-                    Booking with us is simple and secure. Just fill out the form on the right with your details and preferred service. You can select a convenient date and time between 10:00 AM and 6:00 PM that fits your schedule. If you need assistance or have any questions, feel free to reach out to our support team anytime.
-                </p>
-                <p>
-                    Our goal is to make your experience smooth, enjoyable, and tailored just for you. We value your trust and strive to exceed your expectations with every appointment. After you confirm your booking, you will receive a confirmation email with all the details and a reminder as your appointment date approaches.
-                </p>
-                <p>
-                    Thank you for choosing us! We look forward to serving you and ensuring your complete satisfaction.
-                </p>
+<!-- Page Header Start -->
+<div class="page-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <h2>Book Now</h2>
+            </div>
+            <div class="col-12">
+                <a href="{% url 'home' %}">Home</a>
+                <a href="#">Book Now</a>
             </div>
         </div>
-
-        <!-- Right side: booking form -->
-        <div class="col-md-6">
-            <div class="card shadow">
-                <div class="card-header bg-success text-white text-center">
-                    <h3>Booking Form</h3>
-                </div>
-                <div class="card-body">
-
-                    <div class="mb-3">
-                        <label for="id_name" class="form-label">Name</label>
-                        <input type="text" name="name" id="id_name" class="form-control" value="{{ form.name.value|default:'' }}">
-                        {% if form.name.errors %}
-                            <div class="text-danger small mt-1">{{ form.name.errors|striptags }}</div>
-                        {% endif %}
-                    </div>
-
-                    <div class="mb-3">
-                        <label for="id_email" class="form-label">Email</label>
-                        <input type="email" name="email" id="id_email" class="form-control" value="{{ form.email.value|default:'' }}">
-                        {% if form.email.errors %}
-                            <div class="text-danger small mt-1">{{ form.email.errors|striptags }}</div>
-                        {% endif %}
-                    </div>
-
-                    <div class="mb-3">
-                        <label for="id_phone" class="form-label">Phone</label>
-                        <input type="text" name="phone" id="id_phone" class="form-control" value="{{ form.phone.value|default:'' }}">
-                        {% if form.phone.errors %}
-                            <div class="text-danger small mt-1">{{ form.phone.errors|striptags }}</div>
-                        {% endif %}
-                    </div>
-
-                    <div class="mb-3">
-                        <label for="id_service" class="form-label">Service</label>
-                        <select name="service" id="id_service" class="form-select">
-                            <option value="" disabled selected>Select a service</option>
-                            {% for service in services %}
-                                <option value="{{ service.id }}" {% if form.service.value == service.id %}selected{% endif %}>{{ service.title }}</option>
-                            {% endfor %}
-                        </select>
-                        {% if form.service.errors %}
-                            <div class="text-danger small mt-1">{{ form.service.errors|striptags }}</div>
-                        {% endif %}
-                    </div>
-
-                    <div class="mb-3">
-                        <label for="id_booking_date" class="form-label">Booking Date & Time</label>
-                        <input type="datetime-local" name="booking_date" id="id_booking_date" class="form-control" value="{{ form.booking_date.value|default:'' }}">
-                        {% if form.booking_date.errors %}
-                            <div class="text-danger small mt-1">{{ form.booking_date.errors|striptags }}</div>
-                        {% endif %}
-                        <div class="form-text">Please select a time between 10:00 AM and 6:00 PM.</div>
-                    </div>
-
-                    <div class="d-grid">
-                        <button type="submit" class="btn btn-success btn-lg">Confirm Booking</button>
-                    </div>
-
-                </div>
-            </div>
-        </div>
-
     </div>
-</form>
+</div>
+<!-- Page Header End -->
 
+<!-- Booking & Info Section Start -->
+<div class="contact">  <!-- reuse same 'contact' class for consistent spacing -->
+    <div class="container">
+        <div class="section-header text-center">
+            <p>Book Your Appointment</p>
+            <h2>Schedule Your Service</h2>
+        </div>
+        <div class="row mb-3">
+            <div class="col-12">
+                <div class="alert alert-info text-center">
+                    <strong>Note:</strong> Please ensure to select a time between 10:00 AM and 6:00 PM.
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <!-- FAQ Section (left) -->
+            <div class="col-md-6">
+                <div class="faqs">
+                    <div id="accordion">
+                        {% for faq in faqs %}
+                            <div class="card">
+                                <div class="card-header">
+                                    <a class="card-link {% if not forloop.first %}collapsed{% endif %}" data-toggle="collapse" href="#collapse{{ forloop.counter }}">
+                                        <span>{{ forloop.counter }}</span> {{ faq.question }}
+                                    </a>
+                                </div>
+                                <div id="collapse{{ forloop.counter }}" class="collapse {% if forloop.first %}show{% endif %}" data-parent="#accordion">
+                                    <div class="card-body">
+                                        {{ faq.answer }}
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+
+            <!-- Booking Form Section (right) -->
+            <div class="col-md-6">
+                <div class="contact-form">
+                    <form method="POST" action="">
+                        {% csrf_token %}
+
+                        {% if form.non_field_errors %}
+                            <div class="alert alert-danger">
+                                {{ form.non_field_errors }}
+                            </div>
+                        {% endif %}
+
+                        <div class="form-group mb-3">
+                            {{ form.name.label_tag }}
+                            {{ form.name|add_class:"form-control" }}
+                            {% if form.name.errors %}
+                                <div class="text-danger small mt-1">{{ form.name.errors|striptags }}</div>
+                            {% endif %}
+                        </div>
+
+                        <div class="form-group mb-3">
+                            {{ form.email.label_tag }}
+                            {{ form.email|add_class:"form-control" }}
+                            {% if form.email.errors %}
+                                <div class="text-danger small mt-1">{{ form.email.errors|striptags }}</div>
+                            {% endif %}
+                        </div>
+
+                        <div class="form-group mb-3">
+                            {{ form.phone.label_tag }}
+                            {{ form.phone|add_class:"form-control" }}
+                            {% if form.phone.errors %}
+                                <div class="text-danger small mt-1">{{ form.phone.errors|striptags }}</div>
+                            {% endif %}
+                        </div>
+
+                        <div class="form-group mb-3">
+                            {{ form.service.label_tag }}
+                            {{ form.service|add_class:"form-select" }}
+                            {% if form.service.errors %}
+                                <div class="text-danger small mt-1">{{ form.service.errors|striptags }}</div>
+                            {% endif %}
+                        </div>
+
+                        <div class="form-group mb-3">
+                            {{ form.booking_date.label_tag }}
+                            {{ form.booking_date|add_class:"form-control" }}
+                            {% if form.booking_date.errors %}
+                                <div class="text-danger small mt-1">{{ form.booking_date.errors|striptags }}</div>
+                            {% endif %}
+                            <small class="form-text text-muted">Please select a time between 10:00 AM and 6:00 PM.</small>
+                        </div>
+
+                        <div class="d-grid mb-3">
+                            <button type="submit" class="btn btn-success btn-lg">Confirm Booking</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Booking & Info Section End -->
+
+<!-- Time Validation Script -->
 <script>
     const input = document.getElementById("id_booking_date");
     const now = new Date();
     now.setMinutes(now.getMinutes() + 1);
-    input.min = now.toISOString().slice(0,16);
+    input.min = now.toISOString().slice(0, 16);
 
     input.addEventListener('change', function () {
         const selected = new Date(this.value);

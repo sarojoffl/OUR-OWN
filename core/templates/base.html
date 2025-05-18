@@ -29,13 +29,13 @@
 <body>
     <div class="wrapper">
         <!-- Header Start -->
-        <div class="header home">
+        <div class="header w-100">
             <div class="container-fluid">
                 <div class="header-top row align-items-center">
                     <div class="col-lg-3">
                         <div class="brand">
                             <a href="{% url 'home' %}">
-                                <img src="{% static 'img/logo.jpg' %}" alt="Logo" class="img-fluid">
+                                <img src="{% static 'img/logo.jpg' %}" alt="OUR OWN Contracting and Hospitality" class="img-fluid">
                             </a>
                         </div>
                     </div>
@@ -62,7 +62,6 @@
                             <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
                                 <span class="navbar-toggler-icon"></span>
                             </button>
-
                             <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
                                 <div class="navbar-nav ml-auto">
                                     <a href="{% url 'home' %}" class="nav-item nav-link">Home</a>
@@ -73,44 +72,64 @@
                                     <a href="{% url 'book_now' %}" class="nav-item nav-link">Book Now</a>
                                 </div>
                             </div>
-
-                            </div>
                         </div>
                     </div>
                 </div>
-                {% block header %}
-                {% endblock %}
+                {% block header %}{% endblock %}
             </div>
         </div>
         <!-- Header End -->
-         
+
         <!-- Main Content Start -->
-        {% block content %}
-        {% endblock %}
+        {% block content %}{% endblock %}
         <!-- Main Content End -->
 
         <!-- Footer Start -->
         <div class="footer">
             <div class="container">
                 <div class="row">
-                    <!-- Footer content columns here, unchanged -->
-                   <div class="col-md-6 col-lg-3">
-    <div class="footer-contact">
-        <h2>Get In Touch</h2>
-        <p><i class="fa fa-map-marker-alt"></i>123 Street, New York, USA</p>
-        <p><i class="fa fa-phone-alt"></i>+012 345 67890</p>
-        <p><i class="fa fa-envelope"></i>info@example.com</p>
-        <div class="footer-social">
-            <a href="#"><i class="fab fa-twitter"></i></a>
-            <a href="#"><i class="fab fa-facebook-f"></i></a>
-            <a href="#"><i class="fab fa-youtube"></i></a>
-            <a href="#"><i class="fab fa-instagram"></i></a>
-            <a href="#"><i class="fab fa-linkedin-in"></i></a>
-        </div>
-    </div>
-</div>
-
-                    <!-- ... Other footer columns ... -->
+                    <div class="col-md-6 col-lg-3">
+                        <div class="footer-contact">
+                            <h2>Get In Touch</h2>
+                            <p><i class="fa fa-map-marker-alt"></i>123 Street, New York, USA</p>
+                            <p><i class="fa fa-phone-alt"></i>+012 345 67890</p>
+                            <p><i class="fa fa-envelope"></i>info@example.com</p>
+                            <div class="footer-social">
+                                <a href="#"><i class="fab fa-twitter"></i></a>
+                                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                                <a href="#"><i class="fab fa-youtube"></i></a>
+                                <a href="#"><i class="fab fa-instagram"></i></a>
+                                <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-3">
+                        <div class="footer-link">
+                            <h2>Quick Links</h2>
+                            <a href="{% url 'about' %}">About Us</a>
+                            <a href="{% url 'services' %}">Our Services</a>
+                            <a href="{% url 'blog' %}">Latest Blog</a>
+                            <a href="{% url 'contact' %}">Contact Us</a>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-3">
+                        <div class="footer-link">
+                            <h2>Why Choose Us</h2>
+                            <a href="#">Experienced Professionals</a>
+                            <a href="#">Reliable & Trustworthy</a>
+                            <a href="#">Affordable Pricing</a>
+                            <a href="#">Customer Satisfaction</a>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-3">
+                        <div class="footer-link">
+                            <h2>What Clients Say</h2>
+                            <a href="#">"Very professional!"</a>
+                            <a href="#">"Highly recommended."</a>
+                            <a href="#">"Great experience."</a>
+                            <a href="#">"Will hire again."</a>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="container footer-menu">
@@ -125,10 +144,10 @@
             <div class="container copyright">
                 <div class="row">
                     <div class="col-md-6">
-                        <p>&copy; <a href="#">CleanMe</a>, All Right Reserved.</p>
+                        <p>&copy; <a href="#">OUR OWN Contracting and Hospitality</a>, All Right Reserved.</p>
                     </div>
                     <div class="col-md-6">
-                        <p>Designed By <a href="#">YourCompany</a></p>
+                        <p>Designed By <a href="https://www.kitwosd.com/">Kitwosd IT Support Center</a></p>
                     </div>
                 </div>
             </div>

@@ -7,8 +7,15 @@
 <!-- Page Header -->
 <div class="page-header">
     <div class="container">
-        <div class="col-12"><h2>About Us</h2></div>
-        <div class="col-12"><a href="{% url 'home' %}">Home</a> <a href="">About Us</a></div>
+        <div class="row">
+            <div class="col-12">
+                <h2>About Us</h2>
+            </div>
+            <div class="col-12">
+                <a href="{% url 'home' %}">Home</a>
+                <a href="#">About Us</a>
+            </div>
+        </div>
     </div>
 </div>
 
@@ -29,6 +36,36 @@
                     <a class="btn" href="">Learn More</a>
                 </div>
             </div>
+        </div>
+    </div>
+</div>
+
+<!-- Message from Chairman -->
+<div class="container mt-5">
+    <div class="row align-items-center">
+        <div class="col-lg-5 col-md-6 mb-3 mb-md-0">
+            {% if about.chairman_image %}
+                <img src="{{ about.chairman_image.url }}" alt="Chairman" class="img-fluid rounded">
+            {% endif %}
+        </div>
+        <div class="col-lg-7 col-md-6">
+            <h3 class="mb-3">Message from Chairman</h3>
+            <p>{{ about.chairman_message }}</p>
+        </div>
+    </div>
+</div>
+
+<!-- Message from Managing Director -->
+<div class="container mt-5">
+    <div class="row align-items-center flex-md-row-reverse">
+        <div class="col-lg-5 col-md-6 mb-3 mb-md-0">
+            {% if about.md_image %}
+                <img src="{{ about.md_image.url }}" alt="Managing Director" class="img-fluid rounded">
+            {% endif %}
+        </div>
+        <div class="col-lg-7 col-md-6">
+            <h3 class="mb-3">Message from Managing Director</h3>
+            <p>{{ about.md_message }}</p>
         </div>
     </div>
 </div>

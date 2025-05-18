@@ -84,7 +84,11 @@ def blog(request):
 
 def blog_detail(request, slug):
     blog = get_object_or_404(BlogPost, slug=slug)
-    return render(request, 'core/blog_detail.html', {'blog': blog})
+    recent_blogs = BlogPost.objects.order_by('-publish_date')[:5]
+    return render(request, 'core/blog_detail.html', {
+        'blog': blog,
+        'recent_blogs': recent_blogs,
+    })
 
 def book_service(request):
     if request.method == 'POST':
@@ -95,7 +99,12 @@ def book_service(request):
     else:
         form = BookingForm()
 
-    # Fetch all services to display in the booking form
+    # Fetch all services and FAQs to display on the booking page
     services = Service.objects.all()
+    faqs = FAQ.objects.all()
 
-    return render(request, 'core/book_now.html', {'form': form, 'services': services})
+    return render(request, 'core/book_now.html', {'form': form, 'services': services, 'faqs': faqs})
+
+def test(request):
+    # This is a placeholder function for the test view
+    return render(request, 'core/test.html')

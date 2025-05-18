@@ -1,37 +1,62 @@
 {% extends 'base.html' %}
 {% load static %}
-{% block title %}Book Now{% endblock %}
+{% block title %}Booking Successful{% endblock %}
+
 {% block content %}
 
-<div class="container py-5">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card shadow-sm">
-                <div class="card-header text-center bg-success text-white">
-                    <h3>Booking Successful!</h3>
-                </div>
-                <div class="card-body">
-                    <div class="list-group">
-                        <p class="list-group-item">
-                            <strong>Name: </strong> {{ booking.name }}
-                        </p>
-                        <p class="list-group-item">
-                            <strong>Email: </strong> {{ booking.email }}
-                        </p>
-                        <p class="list-group-item">
-                            <strong>Phone: </strong> {{ booking.phone }}
-                        </p>
-                        <p class="list-group-item">
-                            <strong>Service: </strong> {{ booking.service.title }}
-                        </p>
-                        <p class="list-group-item">
-                            <strong>Booking Date: </strong> {{ booking.booking_date }}
-                        </p>
+<!-- Page Header Start -->
+<div class="page-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <h2>Booking Successful</h2>
+            </div>
+            <div class="col-12">
+                <a href="{% url 'home' %}">Home</a>
+                <a href="#">Booking Successful</a>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Page Header End -->
+
+<!-- Booking Success Info Start -->
+<div class="contact py-5">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card shadow-sm">
+                    <div class="card-header bg-success text-white text-center">
+                        <h3>Your Booking Was Successful!</h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="list-group mb-4">
+                            <p class="list-group-item">
+                                <strong>Name:</strong> {{ booking.name }}
+                            </p>
+                            <p class="list-group-item">
+                                <strong>Email:</strong> {{ booking.email }}
+                            </p>
+                            <p class="list-group-item">
+                                <strong>Phone:</strong> {{ booking.phone }}
+                            </p>
+                            <p class="list-group-item">
+                                <strong>Service:</strong> {{ booking.service.title }}
+                            </p>
+                            <p class="list-group-item">
+                                <strong>Booking Date:</strong> {{ booking.booking_date|date:"F j, Y, g:i A" }}
+                            </p>
+                        </div>
+                        <div class="text-center">
+                            <a href="{% url 'book_now' %}" class="btn btn-primary me-2">Book Another</a>
+                            <a href="{% url 'home' %}" class="btn btn-secondary">Back to Home</a>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
+<!-- Booking Success Info End -->
 
 {% endblock %}

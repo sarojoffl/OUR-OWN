@@ -1,6 +1,32 @@
 (function ($) {
     "use strict";
     
+    // Hero Header carousel
+    $(document).ready(function () {
+        console.log("DOM ready");
+
+        if ($(".header-carousel").length) {
+            console.log("Carousel element found");
+            $(".header-carousel").owlCarousel({
+                items: 1,
+                autoplay: true,
+                smartSpeed: 2000,
+                center: false,
+                dots: false,
+                loop: true,
+                margin: 0,
+                nav: true,
+                navText: [
+                    '<i class="bi bi-arrow-left"></i>',
+                    '<i class="bi bi-arrow-right"></i>'
+                ]
+            });
+        } else {
+            console.warn("No .header-carousel element found");
+        }
+    });
+
+
     // Back to top button
     $(window).scroll(function () {
         if ($(this).scrollTop() > 200) {

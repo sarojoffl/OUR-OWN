@@ -51,6 +51,46 @@
       {{ form.image.errors }}
     </div>
 
+    <!-- Chairman message and image -->
+    <hr>
+    <h4>Chairman</h4>
+    <div class="mb-3">
+      <label for="id_chairman_message" class="form-label">Chairman Message</label>
+      <textarea name="chairman_message" class="form-control" id="id_chairman_message" rows="4">{{ form.chairman_message.value|default_if_none:'' }}</textarea>
+      {{ form.chairman_message.errors }}
+    </div>
+
+    <div class="mb-3">
+      <label for="id_chairman_image" class="form-label">Chairman Image</label>
+      {% if form.instance.chairman_image %}
+        <div class="mb-2">
+          <img src="{{ form.instance.chairman_image.url }}" alt="Chairman Image" class="img-thumbnail" width="200">
+        </div>
+      {% endif %}
+      <input type="file" name="chairman_image" class="form-control" id="id_chairman_image">
+      {{ form.chairman_image.errors }}
+    </div>
+
+    <!-- Managing Director message and image -->
+    <hr>
+    <h4>Managing Director</h4>
+    <div class="mb-3">
+      <label for="id_md_message" class="form-label">Managing Director Message</label>
+      <textarea name="md_message" class="form-control" id="id_md_message" rows="4">{{ form.md_message.value|default_if_none:'' }}</textarea>
+      {{ form.md_message.errors }}
+    </div>
+
+    <div class="mb-3">
+      <label for="id_md_image" class="form-label">Managing Director Image</label>
+      {% if form.instance.md_image %}
+        <div class="mb-2">
+          <img src="{{ form.instance.md_image.url }}" alt="Managing Director Image" class="img-thumbnail" width="200">
+        </div>
+      {% endif %}
+      <input type="file" name="md_image" class="form-control" id="id_md_image">
+      {{ form.md_image.errors }}
+    </div>
+
     <div class="mb-3">
       <button type="submit" class="btn btn-primary">Save</button>
       <a href="{% url 'admin_about_view' %}" class="btn btn-secondary">Cancel</a>

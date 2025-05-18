@@ -9,8 +9,11 @@
             <p>{{ services.created_at }}</p>
         </div>
         <div class="text-center mb-4">
-            <img src="{{ services.image.url }}" alt="{{ services.title }}" class="img-fluid rounded">
-        </div>
+    <img src="{{ services.image.url }}" alt="{{ services.title }}" 
+         class="img-fluid rounded w-100" 
+         style="max-height: 600px; object-fit: cover;">
+</div>
+
         <div class="service-content">
             <p>{{ services.description|linebreaks }}</p>
         </div>

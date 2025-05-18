@@ -57,6 +57,12 @@ class About(models.Model):
     image = models.ImageField(upload_to='about/')
     why_choose_us = models.TextField(blank=True, null=True)
 
+    chairman_message = models.TextField(blank=True, null=True)
+    chairman_image = models.ImageField(upload_to='about/chairman/', blank=True, null=True)
+
+    md_message = models.TextField(blank=True, null=True)
+    md_image = models.ImageField(upload_to='about/md/', blank=True, null=True)
+
 class FAQ(models.Model):
     question = models.CharField(max_length=255)
     answer = models.TextField()

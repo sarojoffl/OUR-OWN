@@ -65,11 +65,19 @@ class TestimonialForm(forms.ModelForm):
 class AboutForm(forms.ModelForm):
     class Meta:
         model = About
-        fields = ['experience_years', 'title', 'description', 'more_info', 'why_choose_us', 'image']
+        fields = [
+            'experience_years', 'title', 'description', 'more_info',
+            'why_choose_us',
+            'chairman_message', 'chairman_image',
+            'md_message', 'md_image',
+            'image'
+        ]
         widgets = {
             'description': forms.Textarea(attrs={'rows': 4}),
             'more_info': forms.Textarea(attrs={'rows': 3}),
             'why_choose_us': forms.Textarea(attrs={'rows': 3}),
+            'chairman_message': forms.Textarea(attrs={'rows': 4}),
+            'md_message': forms.Textarea(attrs={'rows': 4}),
         }
 
 class ServiceForm(forms.ModelForm):
