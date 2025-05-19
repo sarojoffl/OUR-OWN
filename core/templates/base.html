@@ -3,13 +3,13 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>{% block title %}OUR OWN Contracting and Hospitality{% endblock %}</title>
+    <title>{% block title %}{{ org.name|default:"OUR OWN Contracting and Hospitality" }}{% endblock %}</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="Cleaning Company Website Template" name="keywords">
     <meta content="Cleaning Company Website Template" name="description">
 
     <!-- Favicon -->
-    <link href="{% static 'img/logo.jpg' %}" rel="icon">
+    <link href="{% if org and org.logo %}{{ org.logo.url }}{% else %}{% static 'img/logo.jpg' %}{% endif %}" rel="icon">
 
     <!-- Google Font -->
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;300;400&display=swap" rel="stylesheet">
@@ -35,25 +35,40 @@
                     <div class="col-lg-3">
                         <div class="brand">
                             <a href="{% url 'home' %}">
-                                <img src="{% static 'img/logo.jpg' %}" alt="OUR OWN Contracting and Hospitality" class="img-fluid">
+                                <img src="{% if org and org.logo %}{{ org.logo.url }}{% else %}{% static 'img/logo.jpg' %}{% endif %}" alt="{{ org.name|default:'OUR OWN Contracting and Hospitality' }}" class="img-fluid">
                             </a>
                         </div>
                     </div>
                     <div class="col-lg-9">
                         <div class="topbar">
                             <div class="topbar-col">
-                                <a href="tel:+01234567890"><i class="fa fa-phone-alt"></i>+012 345 67890</a>
+                                {% if org and org.phone1 %}
+                                    <a href="tel:{{ org.phone1 }}"><i class="fa fa-phone-alt"></i>{{ org.phone1 }}</a>
+                                {% else %}
+                                    <a href="tel:+01234567890"><i class="fa fa-phone-alt"></i>+012 345 67890</a>
+                                {% endif %}
                             </div>
                             <div class="topbar-col">
-                                <a href="mailto:info@example.com"><i class="fa fa-envelope"></i>info@example.com</a>
+                                {% if org and org.email1 %}
+                                    <a href="mailto:{{ org.email1 }}"><i class="fa fa-envelope"></i>{{ org.email1 }}</a>
+                                {% else %}
+                                    <a href="mailto:info@example.com"><i class="fa fa-envelope"></i>info@example.com</a>
+                                {% endif %}
                             </div>
                             <div class="topbar-col">
                                 <div class="topbar-social">
-                                    <a href="#"><i class="fab fa-twitter"></i></a>
-                                    <a href="#"><i class="fab fa-facebook-f"></i></a>
-                                    <a href="#"><i class="fab fa-youtube"></i></a>
-                                    <a href="#"><i class="fab fa-instagram"></i></a>
-                                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                                    {% if org and org.twitter %}
+                                        <a href="{{ org.twitter }}"><i class="fab fa-twitter"></i></a>
+                                    {% endif %}
+                                    {% if org and org.facebook %}
+                                        <a href="{{ org.facebook }}"><i class="fab fa-facebook-f"></i></a>
+                                    {% endif %}
+                                    {% if org and org.instagram %}
+                                        <a href="{{ org.instagram }}"><i class="fab fa-instagram"></i></a>
+                                    {% endif %}
+                                    {% if org and org.linkedin %}
+                                        <a href="{{ org.linkedin }}"><i class="fab fa-linkedin-in"></i></a>
+                                    {% endif %}
                                 </div>
                             </div>
                         </div>
@@ -91,15 +106,22 @@
                     <div class="col-md-6 col-lg-3">
                         <div class="footer-contact">
                             <h2>Get In Touch</h2>
-                            <p><i class="fa fa-map-marker-alt"></i>123 Street, New York, USA</p>
-                            <p><i class="fa fa-phone-alt"></i>+012 345 67890</p>
-                            <p><i class="fa fa-envelope"></i>info@example.com</p>
+                            <p><i class="fa fa-map-marker-alt"></i> {{ org.address|default:"123 Street, New York, USA" }}</p>
+                            <p><i class="fa fa-phone-alt"></i> {{ org.phone1|default:"+012 345 67890" }}</p>
+                            <p><i class="fa fa-envelope"></i> {{ org.email1|default:"info@example.com" }}</p>
                             <div class="footer-social">
-                                <a href="#"><i class="fab fa-twitter"></i></a>
-                                <a href="#"><i class="fab fa-facebook-f"></i></a>
-                                <a href="#"><i class="fab fa-youtube"></i></a>
-                                <a href="#"><i class="fab fa-instagram"></i></a>
-                                <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                                {% if org and org.twitter %}
+                                    <a href="{{ org.twitter }}"><i class="fab fa-twitter"></i></a>
+                                {% endif %}
+                                {% if org and org.facebook %}
+                                    <a href="{{ org.facebook }}"><i class="fab fa-facebook-f"></i></a>
+                                {% endif %}
+                                {% if org and org.instagram %}
+                                    <a href="{{ org.instagram }}"><i class="fab fa-instagram"></i></a>
+                                {% endif %}
+                                {% if org and org.linkedin %}
+                                    <a href="{{ org.linkedin }}"><i class="fab fa-linkedin-in"></i></a>
+                                {% endif %}
                             </div>
                         </div>
                     </div>
@@ -115,36 +137,27 @@
                     <div class="col-md-6 col-lg-3">
                         <div class="footer-link">
                             <h2>Why Choose Us</h2>
-                            <a href="#">Experienced Professionals</a>
-                            <a href="#">Reliable & Trustworthy</a>
-                            <a href="#">Affordable Pricing</a>
-                            <a href="#">Customer Satisfaction</a>
+                            <p>Experienced Professionals</p>
+                            <p>Reliable &amp; Trustworthy</p>
+                            <p>Affordable Pricing</p>
+                            <p>Customer Satisfaction</p>
                         </div>
                     </div>
                     <div class="col-md-6 col-lg-3">
                         <div class="footer-link">
                             <h2>What Clients Say</h2>
-                            <a href="#">"Very professional!"</a>
-                            <a href="#">"Highly recommended."</a>
-                            <a href="#">"Great experience."</a>
-                            <a href="#">"Will hire again."</a>
+                            <p>"Very professional!"</p>
+                            <p>"Highly recommended."</p>
+                            <p>"Great experience."</p>
+                            <p>"Will hire again."</p>
                         </div>
                     </div>
-                </div>
-            </div>
-            <div class="container footer-menu">
-                <div class="f-menu">
-                    <a href="#">Terms of use</a>
-                    <a href="#">Privacy policy</a>
-                    <a href="#">Cookies</a>
-                    <a href="#">Help & FAQs</a>
-                    <a href="#">Contact us</a>
                 </div>
             </div>
             <div class="container copyright">
                 <div class="row">
                     <div class="col-md-6">
-                        <p>&copy; <a href="#">OUR OWN Contracting and Hospitality</a>, All Right Reserved.</p>
+                        <p>&copy; {{ org.name|default:"OUR OWN Contracting and Hospitality" }}.</p>
                     </div>
                     <div class="col-md-6">
                         <p>Designed By <a href="https://www.kitwosd.com/">Kitwosd IT Support Center</a></p>

@@ -1,0 +1,87 @@
+{% extends 'admin_base.html' %}
+
+{% block title %}{{ action }} Organization Details{% endblock %}
+
+{% block content %}
+  <h2>{{ action }} Organization Details</h2>
+
+  <form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+
+    <div class="mb-3">
+      <label for="id_name" class="form-label">Organization Name</label>
+      <input type="text" name="name" class="form-control" id="id_name" value="{{ form.name.value|default_if_none:'' }}">
+      {{ form.name.errors }}
+    </div>
+
+    <div class="mb-3">
+      <label for="id_address" class="form-label">Address</label>
+      <textarea name="address" class="form-control" id="id_address" rows="3">{{ form.address.value|default_if_none:'' }}</textarea>
+      {{ form.address.errors }}
+    </div>
+
+    <div class="mb-3">
+      <label for="id_phone1" class="form-label">Phone 1</label>
+      <input type="text" name="phone1" class="form-control" id="id_phone1" value="{{ form.phone1.value|default_if_none:'' }}">
+      {{ form.phone1.errors }}
+    </div>
+
+    <div class="mb-3">
+      <label for="id_phone2" class="form-label">Phone 2</label>
+      <input type="text" name="phone2" class="form-control" id="id_phone2" value="{{ form.phone2.value|default_if_none:'' }}">
+      {{ form.phone2.errors }}
+    </div>
+
+    <div class="mb-3">
+      <label for="id_email1" class="form-label">Email 1</label>
+      <input type="email" name="email1" class="form-control" id="id_email1" value="{{ form.email1.value|default_if_none:'' }}">
+      {{ form.email1.errors }}
+    </div>
+
+    <div class="mb-3">
+      <label for="id_email2" class="form-label">Email 2</label>
+      <input type="email" name="email2" class="form-control" id="id_email2" value="{{ form.email2.value|default_if_none:'' }}">
+      {{ form.email2.errors }}
+    </div>
+
+    <div class="mb-3">
+      <label for="id_facebook" class="form-label">Facebook URL</label>
+      <input type="url" name="facebook" class="form-control" id="id_facebook" value="{{ form.facebook.value|default_if_none:'' }}">
+      {{ form.facebook.errors }}
+    </div>
+
+    <div class="mb-3">
+      <label for="id_twitter" class="form-label">Twitter URL</label>
+      <input type="url" name="twitter" class="form-control" id="id_twitter" value="{{ form.twitter.value|default_if_none:'' }}">
+      {{ form.twitter.errors }}
+    </div>
+
+    <div class="mb-3">
+      <label for="id_instagram" class="form-label">Instagram URL</label>
+      <input type="url" name="instagram" class="form-control" id="id_instagram" value="{{ form.instagram.value|default_if_none:'' }}">
+      {{ form.instagram.errors }}
+    </div>
+
+    <div class="mb-3">
+      <label for="id_linkedin" class="form-label">LinkedIn URL</label>
+      <input type="url" name="linkedin" class="form-control" id="id_linkedin" value="{{ form.linkedin.value|default_if_none:'' }}">
+      {{ form.linkedin.errors }}
+    </div>
+
+    <div class="mb-3">
+      <label for="id_logo" class="form-label">Logo</label>
+      {% if form.instance.logo %}
+        <div class="mb-2">
+          <img src="{{ form.instance.logo.url }}" alt="Current Logo" style="max-height: 100px;">
+        </div>
+      {% endif %}
+      <input type="file" name="logo" class="form-control" id="id_logo">
+      {{ form.logo.errors }}
+    </div>
+
+    <div class="mb-3">
+      <button type="submit" class="btn btn-primary">{{ action }} Organization Details</button>
+      <a href="{% url 'admin_organization_details' %}" class="btn btn-secondary">Cancel</a>
+    </div>
+  </form>
+{% endblock %}

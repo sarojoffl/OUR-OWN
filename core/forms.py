@@ -1,6 +1,6 @@
 # forms.py
 from django import forms
-from .models import ContactMessage, Booking, BlogPost, FAQ, Testimonial, About, Service, Feature
+from .models import ContactMessage, Booking, BlogPost, FAQ, Testimonial, About, Service, Feature, OrganizationInfo
 from datetime import time
 from django.utils import timezone
 
@@ -68,8 +68,8 @@ class AboutForm(forms.ModelForm):
         fields = [
             'experience_years', 'title', 'description', 'more_info',
             'why_choose_us',
-            'chairman_message', 'chairman_image',
-            'md_message', 'md_image',
+            'chairman_message', 'chairman_image', 'chairman_name',
+            'md_message', 'md_image', 'md_name',
             'image'
         ]
         widgets = {
@@ -89,3 +89,20 @@ class FeatureForm(forms.ModelForm):
     class Meta:
         model = Feature
         fields = ['title', 'description', 'image']
+
+class OrganizationInfoForm(forms.ModelForm):
+    class Meta:
+        model = OrganizationInfo
+        fields = '__all__'
+        widgets = {
+            'name': forms.TextInput(attrs={'class': 'form-control'}),
+            'address': forms.Textarea(attrs={'class': 'form-control', 'rows': 3}),
+            'phone1': forms.TextInput(attrs={'class': 'form-control'}),
+            'phone2': forms.TextInput(attrs={'class': 'form-control'}),
+            'email1': forms.EmailInput(attrs={'class': 'form-control'}),
+            'email2': forms.EmailInput(attrs={'class': 'form-control'}),
+            'facebook': forms.URLInput(attrs={'class': 'form-control'}),
+            'twitter': forms.URLInput(attrs={'class': 'form-control'}),
+            'instagram': forms.URLInput(attrs={'class': 'form-control'}),
+            'linkedin': forms.URLInput(attrs={'class': 'form-control'}),
+        }

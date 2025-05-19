@@ -75,7 +75,7 @@ a:focus {
     position: relative;
     width: 100%;
     padding: 15px 0 0 0;
-    background: #00539C;
+    background: #ffffff;
 }
 
 .header.home {
@@ -126,7 +126,7 @@ a:focus {
 }
 
 .header .topbar-col a {
-    color: #ffffff;
+    color: #8d1739;
     font-size: 13px;
 }
 
@@ -146,7 +146,7 @@ a:focus {
 .header .topbar-social a i {
     margin-right: 10px;
     font-size: 18px;
-    color: #ffffff;
+    color: #8d1739;
 }
 
 .header .topbar-social a:last-child i {
@@ -181,7 +181,7 @@ a:focus {
     .header .navbar-light .show > .nav-link {
         position: relative;
         padding: 8px 10px;
-        color: #ffffff;
+        color: #8d1739;
         font-size: 16px;
         z-index: 1;
     }
@@ -502,10 +502,10 @@ a:focus {
     padding: 15px 35px;
     font-size: 16px;
     text-transform: uppercase;
-    color: #000000;
+    color: #fff;
     border: none;
     border-radius: 5px;
-    background: #FFD662;
+    background: #8d1739;
     transition: .3s;
 }
 
@@ -565,10 +565,10 @@ a:focus {
     padding: 10px 20px;
     font-size: 14px;
     text-transform: uppercase;
-    color: #000000;
+    color: #fff;
     border: none;
     border-radius: 5px;
-    background: #FFD662;
+    background: #8d1739;
     transition: .3s;
 }
 
@@ -601,10 +601,10 @@ a:focus {
     padding: 15px 35px;
     font-size: 16px;
     text-transform: uppercase;
-    color: #000000;
+    color: #fff;
     border: none;
     border-radius: 5px;
-    background: #FFD662;
+    background: #8d1739;
     transition: .3s;
 }
 
@@ -806,8 +806,8 @@ a:focus {
     height: 40px;
     margin-right: 10px;
     text-align: center;
-    background: #FFD662;
-    color: #000000;
+    background: #8d1739;
+    color: #fff;
     border-radius: 5px;
 }
 
@@ -843,10 +843,10 @@ a:focus {
     padding: 15px 35px;
     font-size: 16px;
     text-transform: uppercase;
-    color: #000000;
+    color: #fff;
     border: none;
     border-radius: 5px;
-    background: #FFD662;
+    background: #8d1739;
     transition: .3s;
 }
 
@@ -1170,10 +1170,10 @@ a:focus {
     padding: 10px 20px;
     font-size: 14px;
     text-transform: uppercase;
-    color: #000000;
+    color: #fff;
     border: none;
     border-radius: 5px;
-    background: #FFD662;
+    background: #8d1739;
     transition: .3s;
 }
 
@@ -1674,10 +1674,10 @@ a:focus {
 .contact .contact-form .btn {
     height: 60px;
     padding: 0 20px;
-    color: #000000;
+    color: #ffffff;
     font-size: 18px;
     text-transform: uppercase;
-    background: #FFD662;
+    background: #8d1739;
     border-radius: 5px;
     transition: .3s;
 }
@@ -2047,9 +2047,9 @@ a:focus {
 /*******************************/
 /********** Button CSS *********/
 /*******************************/
-.btn-yellow {
-  background: #FFD662;
-  color: #000;
+.btn-red {
+  background: #8d1739;
+  color: #fff;
   border: none;
   border-radius: 5px;
   padding: 10px 20px;
@@ -2058,7 +2058,7 @@ a:focus {
   transition: 0.3s;
 }
 
-.btn-yellow:hover {
+.btn-red:hover {
   background: #00539C;
   color: #fff;
 }

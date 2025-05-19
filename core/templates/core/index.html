@@ -68,7 +68,7 @@
                     <h2><span>{{ about.experience_years }}</span> Years Experience</h2>
                     <p>{{ about.description }}</p>
                     <p>{{ about.more_info }}</p>
-                    <a class="btn" href="">Learn More</a>
+                    <a class="btn" href="{% url 'about' %}">Learn More</a>
                 </div>
             </div>
         </div>
@@ -98,7 +98,7 @@
         </div>
 
         <div class="text-center">
-            <a class="btn btn-yellow" href="{% url 'services' %}">View All Services</a>
+            <a class="btn btn-red" href="{% url 'services' %}">View All Services</a>
         </div>
 
     </div>
@@ -115,7 +115,7 @@
                     <h2>Expert Cleaners and World Class Services</h2>
                 </div>
                 <p>{{ about.why_choose_us }}</p>
-                <a class="btn" href="">Learn More</a>
+                <a class="btn" href="{% url 'services' %}">Learn More</a>
             </div>
             <div class="col-md-7">
                 {% for feature in features %}
@@ -223,7 +223,7 @@
             {% endfor %}
         </div>
         <div class="text-center mt-4">
-            <a class="btn btn-yellow" href="{% url 'blog' %}">View All Blogs</a>
+            <a class="btn btn-red" href="{% url 'blog' %}">View All Blogs</a>
         </div>
     </div>
 </div>

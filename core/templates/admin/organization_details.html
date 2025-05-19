@@ -1,0 +1,65 @@
+{% extends "admin_base.html" %}
+{% load static %}
+
+{% block title %}Organization Details{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-3">
+    <h2>Organization Details</h2>
+    <a href="{% url 'edit_organization_details' %}" class="btn btn-success">Edit</a>
+</div>
+
+{% if messages %}
+    {% for message in messages %}
+        <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+            {{ message }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    {% endfor %}
+{% endif %}
+
+<div class="card">
+    <div class="card-body">
+
+        {% if organization.logo %}
+        <div class="mb-4 text-center">
+            <img src="{{ organization.logo.url }}" alt="Organization Logo" class="img-fluid" style="max-height: 150px;">
+        </div>
+        {% endif %}
+
+        <h5 class="card-title">Organization Name</h5>
+        <p class="card-text">{{ organization.name }}</p>
+
+        <h5 class="card-title">Organization Address</h5>
+        <p class="card-text">{{ organization.address }}</p>
+
+        <h5 class="card-title">Phone Numbers</h5>
+        <p class="card-text">{{ organization.phone1 }}</p>
+        {% if organization.phone2 %}
+        <p class="card-text">{{ organization.phone2 }}</p>
+        {% endif %}
+
+        <h5 class="card-title">Email Addresses</h5>
+        <p class="card-text">{{ organization.email1 }}</p>
+        {% if organization.email2 %}
+        <p class="card-text">{{ organization.email2 }}</p>
+        {% endif %}
+
+        <h5 class="card-title">Social Links</h5>
+        <ul class="list-unstyled">
+            {% if organization.facebook %}
+            <li><strong>Facebook:</strong> <a href="{{ organization.facebook }}" target="_blank">{{ organization.facebook }}</a></li>
+            {% endif %}
+            {% if organization.twitter %}
+            <li><strong>Twitter:</strong> <a href="{{ organization.twitter }}" target="_blank">{{ organization.twitter }}</a></li>
+            {% endif %}
+            {% if organization.instagram %}
+            <li><strong>Instagram:</strong> <a href="{{ organization.instagram }}" target="_blank">{{ organization.instagram }}</a></li>
+            {% endif %}
+            {% if organization.linkedin %}
+            <li><strong>LinkedIn:</strong> <a href="{{ organization.linkedin }}" target="_blank">{{ organization.linkedin }}</a></li>
+            {% endif %}
+        </ul>
+    </div>
+</div>
+{% endblock %}

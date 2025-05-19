@@ -63,6 +63,11 @@ urlpatterns = [
     path('dashboard/features/add/', admin_views.add_feature, name='add_feature'),
     path('dashboard/features/edit/<int:pk>/', admin_views.edit_feature, name='edit_feature'),
     path('dashboard/features/delete/<int:pk>/', admin_views.delete_feature, name='delete_feature'),
+
+    # Organization Details
+    path('dashboard/organization/', admin_views.admin_organization_details, name='admin_organization_details'),
+    path('dashboard/organization/edit/', admin_views.edit_organization_details, name='edit_organization_details'),
+
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

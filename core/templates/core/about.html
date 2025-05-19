@@ -1,7 +1,7 @@
 {% extends "base.html" %}
-{% load static %}
 
 {% block title %}About Us{% endblock %}
+
 {% block content %}
 
 <!-- Page Header -->
@@ -20,54 +20,65 @@
 </div>
 
 <!-- About -->
-<div class="about">
+<div class="about py-5">
     <div class="container">
-        <div class="row">
+        <div class="row align-items-center">
             <div class="col-lg-5 col-md-6">
-                <div class="about-img">
-                    <img src="{{ about.image.url }}" alt="Image">
-                </div>
+                {% if about.image %}
+                <img src="{{ about.image.url }}" alt="{{ about.title }}" class="img-fluid rounded" style="max-height: 350px; object-fit: cover; width: 100%;">
+                {% endif %}
             </div>
             <div class="col-lg-7 col-md-6">
-                <div class="about-text">
-                    <h2><span>{{ about.experience_years }}</span> Years Experience</h2>
-                    <p>{{ about.description }}</p>
-                    <p>{{ about.more_info }}</p>
-                    <a class="btn" href="">Learn More</a>
-                </div>
+                <h2><span>{{ about.experience_years }}</span> Years Experience</h2>
+                <p>{{ about.description }}</p>
+                <p>{{ about.more_info }}</p>
             </div>
         </div>
     </div>
 </div>
 
+{% if about.chairman_message or about.chairman_image %}
 <!-- Message from Chairman -->
 <div class="container mt-5">
     <div class="row align-items-center">
         <div class="col-lg-5 col-md-6 mb-3 mb-md-0">
             {% if about.chairman_image %}
-                <img src="{{ about.chairman_image.url }}" alt="Chairman" class="img-fluid rounded">
+                <img src="{{ about.chairman_image.url }}" alt="{{ about.chairman_name|default:'Chairman' }}" class="img-fluid rounded" style="max-height: 350px; object-fit: cover; width: 100%;">
             {% endif %}
         </div>
         <div class="col-lg-7 col-md-6">
-            <h3 class="mb-3">Message from Chairman</h3>
+            <h3 class="mb-3">
+                Message from Chairman
+                {% if about.chairman_name %}
+                    — {{ about.chairman_name }}
+                {% endif %}
+            </h3>
             <p>{{ about.chairman_message }}</p>
         </div>
     </div>
 </div>
+{% endif %}
 
+{% if about.md_message or about.md_image %}
 <!-- Message from Managing Director -->
 <div class="container mt-5">
     <div class="row align-items-center flex-md-row-reverse">
         <div class="col-lg-5 col-md-6 mb-3 mb-md-0">
             {% if about.md_image %}
-                <img src="{{ about.md_image.url }}" alt="Managing Director" class="img-fluid rounded">
+                <img src="{{ about.md_image.url }}" alt="{{ about.md_name|default:'Managing Director' }}" class="img-fluid rounded" style="max-height: 350px; object-fit: cover; width: 100%;">
             {% endif %}
         </div>
         <div class="col-lg-7 col-md-6">
-            <h3 class="mb-3">Message from Managing Director</h3>
+            <h3 class="mb-3">
+                Message from Managing Director
+                {% if about.md_name %}
+                    — {{ about.md_name }}
+                {% endif %}
+            </h3>
             <p>{{ about.md_message }}</p>
         </div>
     </div>
 </div>
+{% endif %}
 
 {% endblock %}

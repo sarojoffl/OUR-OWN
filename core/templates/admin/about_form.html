@@ -51,15 +51,20 @@
       {{ form.image.errors }}
     </div>
 
-    <!-- Chairman message and image -->
+    <!-- Chairman Section -->
     <hr>
     <h4>Chairman</h4>
+    <div class="mb-3">
+      <label for="id_chairman_name" class="form-label">Chairman Name</label>
+      <input type="text" name="chairman_name" class="form-control" id="id_chairman_name"
+             value="{{ form.chairman_name.value|default_if_none:'' }}">
+      {{ form.chairman_name.errors }}
+    </div>
     <div class="mb-3">
       <label for="id_chairman_message" class="form-label">Chairman Message</label>
       <textarea name="chairman_message" class="form-control" id="id_chairman_message" rows="4">{{ form.chairman_message.value|default_if_none:'' }}</textarea>
       {{ form.chairman_message.errors }}
     </div>
-
     <div class="mb-3">
       <label for="id_chairman_image" class="form-label">Chairman Image</label>
       {% if form.instance.chairman_image %}
@@ -71,15 +76,20 @@
       {{ form.chairman_image.errors }}
     </div>
 
-    <!-- Managing Director message and image -->
+    <!-- Managing Director Section -->
     <hr>
     <h4>Managing Director</h4>
+    <div class="mb-3">
+      <label for="id_md_name" class="form-label">Managing Director Name</label>
+      <input type="text" name="md_name" class="form-control" id="id_md_name"
+             value="{{ form.md_name.value|default_if_none:'' }}">
+      {{ form.md_name.errors }}
+    </div>
     <div class="mb-3">
       <label for="id_md_message" class="form-label">Managing Director Message</label>
       <textarea name="md_message" class="form-control" id="id_md_message" rows="4">{{ form.md_message.value|default_if_none:'' }}</textarea>
       {{ form.md_message.errors }}
     </div>
-
     <div class="mb-3">
       <label for="id_md_image" class="form-label">Managing Director Image</label>
       {% if form.instance.md_image %}
