@@ -6,6 +6,7 @@
 {% block content %}
   <div class="d-flex justify-content-between align-items-center mb-3">
     <h2>About Section</h2>
+    <a href="{% url 'edit_about' %}" class="btn btn-warning">Edit About</a>
   </div>
 
   {% if messages %}
@@ -32,7 +33,28 @@
             <img src="{{ about.image.url }}" alt="About Image" class="img-fluid img-thumbnail" style="max-width: 300px;">
           </div>
         {% endif %}
-        <a href="{% url 'edit_about' %}" class="btn btn-warning mt-3">Edit About</a>
+        
+        <!-- Chairman Section -->
+        <hr>
+        <h5>Chairman</h5>
+        <p><strong>Name:</strong> {{ about.chairman_name }}</p>
+        <p><strong>Message:</strong> {{ about.chairman_message }}</p>
+        {% if about.chairman_image %}
+          <div class="text-center my-3">
+            <img src="{{ about.chairman_image.url }}" alt="Chairman Image" class="img-fluid img-thumbnail" style="max-width: 300px;">
+          </div>
+        {% endif %}
+
+        <!-- Managing Director Section -->
+        <hr>
+        <h5>Managing Director</h5>
+        <p><strong>Name:</strong> {{ about.md_name }}</p>
+        <p><strong>Message:</strong> {{ about.md_message }}</p>
+        {% if about.md_image %}
+          <div class="text-center my-3">
+            <img src="{{ about.md_image.url }}" alt="Managing Director Image" class="img-fluid img-thumbnail" style="max-width: 300px;">
+          </div>
+        {% endif %}
       </div>
     </div>
   {% else %}

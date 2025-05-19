@@ -1,6 +1,6 @@
 # forms.py
 from django import forms
-from .models import ContactMessage, Booking, BlogPost, FAQ, Testimonial, About, Service, Feature, OrganizationInfo
+from .models import ContactMessage, Booking, BlogPost, FAQ, Testimonial, About, Service, Feature, OrganizationInfo, CarouselItem
 from datetime import time
 from django.utils import timezone
 
@@ -105,4 +105,14 @@ class OrganizationInfoForm(forms.ModelForm):
             'twitter': forms.URLInput(attrs={'class': 'form-control'}),
             'instagram': forms.URLInput(attrs={'class': 'form-control'}),
             'linkedin': forms.URLInput(attrs={'class': 'form-control'}),
+        }
+
+class CarouselItemForm(forms.ModelForm):
+    class Meta:
+        model = CarouselItem
+        fields = ['image', 'title', 'description']
+        widgets = {
+            'title': forms.TextInput(attrs={'class': 'form-control'}),
+            'description': forms.Textarea(attrs={'class': 'form-control', 'rows': 3}),
+            'image': forms.ClearableFileInput(attrs={'class': 'form-control'}),
         }

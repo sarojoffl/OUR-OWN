@@ -6,8 +6,8 @@ from django.contrib.auth.decorators import login_required
 from django.core.mail import EmailMultiAlternatives
 from django.template.loader import render_to_string
 
-from .models import Booking, Service, BlogPost, ContactMessage, FAQ, Testimonial, About, Feature, OrganizationInfo
-from .forms import BlogPostForm, FAQForm, BookingStatusForm, AboutForm, ServiceForm, FeatureForm, TestimonialForm, OrganizationInfoForm
+from .models import Booking, Service, BlogPost, ContactMessage, FAQ, Testimonial, About, Feature, OrganizationInfo, CarouselItem
+from .forms import BlogPostForm, FAQForm, BookingStatusForm, AboutForm, ServiceForm, FeatureForm, TestimonialForm, OrganizationInfoForm, CarouselItemForm
 
 # ---------- DASHBOARD ----------
 @login_required
@@ -340,3 +340,43 @@ def edit_organization_details(request):
     else:
         form = OrganizationInfoForm(instance=organization)
     return render(request, 'admin/organization_form.html', {'form': form, 'action': 'Edit'})
+
+# ---------- CAROUSEL ----------
+@login_required
+def admin_carousel(request):
+    carousel_items = CarouselItem.objects.all()
+    return render(request, 'admin/carousel_list.html', {'carousel_items': carousel_items})
+
+@login_required
+def add_carousel_item(request):
+    if request.method == 'POST':
+        form = CarouselItemForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Carousel item added successfully.')
+            return redirect('admin_carousel')
+    else:
+        form = CarouselItemForm()
+    return render(request, 'admin/carousel_form.html', {'form': form, 'action': 'Add'})
+
+@login_required
+def edit_carousel_item(request, pk):
+    carousel_item = get_object_or_404(CarouselItem, pk=pk)
+    if request.method == 'POST':
+        form = CarouselItemForm(request.POST, request.FILES, instance=carousel_item)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Carousel item updated successfully.')
+            return redirect('admin_carousel')
+    else:
+        form = CarouselItemForm(instance=carousel_item)
+    return render(request, 'admin/carousel_form.html', {'form': form, 'action': 'Edit', 'carousel_item': carousel_item})
+
+@login_required
+def delete_carousel_item(request, pk):
+    carousel_item = get_object_or_404(CarouselItem, pk=pk)
+    if request.method == 'POST':
+        carousel_item.delete()
+        messages.success(request, 'Carousel item deleted successfully.')
+        return redirect('admin_carousel')
+    return render(request, 'admin/delete_carousel_item.html', {'carousel_item': carousel_item})

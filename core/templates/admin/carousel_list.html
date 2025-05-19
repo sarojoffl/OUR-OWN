@@ -1,0 +1,46 @@
+{% extends "admin_base.html" %}
+{% block title %}Carousel Items{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-3">
+        <h2>Carousel Items</h2>
+        <a href="{% url 'add_carousel_item' %}" class="btn btn-success">Add Carousel Item</a>
+    </div>
+
+    {% if messages %}
+        {% for message in messages %}
+            <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+                {{ message }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        {% endfor %}
+    {% endif %}
+
+    <table class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Title</th>
+                <th>Image</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in carousel_items %}
+                <tr>
+                    <td>{{ forloop.counter }}</td>
+                    <td>{{ item.title }}</td>
+                    <td>
+                        {% if item.image %}
+                            <img src="{{ item.image.url }}" width="100">
+                        {% endif %}
+                    </td>
+                    <td>
+                        <a href="{% url 'edit_carousel_item' item.pk %}" class="btn btn-warning btn-sm">Edit</a>
+                        <a href="{% url 'delete_carousel_item' item.pk %}" class="btn btn-danger btn-sm">Delete</a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

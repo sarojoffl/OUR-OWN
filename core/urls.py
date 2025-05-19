@@ -68,6 +68,12 @@ urlpatterns = [
     path('dashboard/organization/', admin_views.admin_organization_details, name='admin_organization_details'),
     path('dashboard/organization/edit/', admin_views.edit_organization_details, name='edit_organization_details'),
 
+    # Carousel
+    path('dashboard/carousel/', admin_views.admin_carousel, name='admin_carousel'),
+    path('dashboard/carousel/add/', admin_views.add_carousel_item, name='add_carousel_item'),
+    path('dashboard/carousel/edit/<int:pk>/', admin_views.edit_carousel_item, name='edit_carousel_item'),
+    path('dashboard/carousel/delete/<int:pk>/', admin_views.delete_carousel_item, name='delete_carousel_item'),
+
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
