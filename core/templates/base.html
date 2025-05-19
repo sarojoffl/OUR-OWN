@@ -43,16 +43,16 @@
                         <div class="topbar">
                             <div class="topbar-col">
                                 {% if org and org.phone1 %}
-                                    <a href="tel:{{ org.phone1 }}"><i class="fa fa-phone-alt"></i>{{ org.phone1 }}</a>
+                                    <a href="tel:{{ org.phone1 }}"><i class="fa fa-phone-alt"></i><strong>{{ org.phone1 }}</strong></a>
                                 {% else %}
-                                    <a href="tel:+01234567890"><i class="fa fa-phone-alt"></i>+012 345 67890</a>
+                                    <a href="tel:+01234567890"><i class="fa fa-phone-alt"></i><strong>+012 345 67890</strong></a>
                                 {% endif %}
                             </div>
                             <div class="topbar-col">
                                 {% if org and org.email1 %}
-                                    <a href="mailto:{{ org.email1 }}"><i class="fa fa-envelope"></i>{{ org.email1 }}</a>
+                                    <a href="mailto:{{ org.email1 }}"><i class="fa fa-envelope"></i><strong>{{ org.email1 }}</strong></a>
                                 {% else %}
-                                    <a href="mailto:info@example.com"><i class="fa fa-envelope"></i>info@example.com</a>
+                                    <a href="mailto:info@example.com"><i class="fa fa-envelope"></i><strong>info@example.com</strong></a>
                                 {% endif %}
                             </div>
                             <div class="topbar-col">
@@ -73,18 +73,18 @@
                             </div>
                         </div>
                         <div class="navbar navbar-expand-lg bg-light navbar-light">
-                            <a href="#" class="navbar-brand">MENU</a>
+                            <a href="#" class="navbar-brand"><strong>MENU</strong></a>
                             <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
                                 <span class="navbar-toggler-icon"></span>
                             </button>
                             <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
                                 <div class="navbar-nav ml-auto">
-                                    <a href="{% url 'home' %}" class="nav-item nav-link">Home</a>
-                                    <a href="{% url 'about' %}" class="nav-item nav-link">About</a>
-                                    <a href="{% url 'services' %}" class="nav-item nav-link">Service</a>
-                                    <a href="{% url 'blog' %}" class="nav-item nav-link">Blog</a>
-                                    <a href="{% url 'contact' %}" class="nav-item nav-link">Contact</a>
-                                    <a href="{% url 'book_now' %}" class="nav-item nav-link">Book Now</a>
+                                    <a href="{% url 'home' %}" class="nav-item nav-link"><strong>Home</strong></a>
+                                    <a href="{% url 'about' %}" class="nav-item nav-link"><strong>About</strong></a>
+                                    <a href="{% url 'services' %}" class="nav-item nav-link"><strong>Service</strong></a>
+                                    <a href="{% url 'blog' %}" class="nav-item nav-link"><strong>Blog</strong></a>
+                                    <a href="{% url 'contact' %}" class="nav-item nav-link"><strong>Contact</strong></a>
+                                    <a href="{% url 'book_now' %}" class="nav-item nav-link"><strong>Book Now</strong></a>
                                 </div>
                             </div>
                         </div>
