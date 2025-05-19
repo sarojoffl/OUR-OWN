@@ -1031,10 +1031,6 @@ a:focus {
     background: #00539C;
 }
 
-
-/*******************************/
-/******* Testimonial CSS *******/
-/*******************************/
 .testimonial {
     position: relative;
     padding: 45px 0;
@@ -1044,40 +1040,50 @@ a:focus {
     position: relative;
     margin: 0 15px;
     text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .testimonial .testimonial-img {
-    position: relative;
-    margin-bottom: 15px;
-    z-index: 1;
+    margin-bottom: -75px; /* overlap adjustment */
+    z-index: 2;
 }
 
-.testimonial .testimonial-item img {
-    margin: 0 auto;
+.testimonial .testimonial-img img {
     width: 150px;
-    border: 15px solid #ffffff;
-    border-radius: 100px;
+    height: 150px;
+    object-fit: cover;
+    border: 8px solid #ffffff;
+    border-radius: 50%;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
 .testimonial .testimonial-content {
-    position: relative;
-    margin-top: -90px;
-    padding: 100px 25px 25px 25px;
-    text-align: center;
     background: #FFD662;
+    padding: 100px 25px 30px 25px;
     border-radius: 5px;
+    text-align: center;
+    width: 100%;
+    min-height: 280px; /* ensure equal height */
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
 }
 
-.testimonial .testimonial-item p {
+.testimonial .testimonial-content p {
     color: #000000;
     font-size: 16px;
     font-weight: 400;
+    margin-bottom: 15px;
+    flex-grow: 1;
 }
 
 .testimonial .testimonial-content h3 {
     color: #000000;
     font-size: 18px;
-    font-weight: 400;
+    font-weight: 600;
     text-transform: uppercase;
     margin-bottom: 5px;
 }
@@ -1085,7 +1091,7 @@ a:focus {
 .testimonial .testimonial-content h4 {
     font-size: 14px;
     font-weight: 400;
-    margin-bottom: 0;
+    margin: 0;
 }
 
 .testimonial .owl-nav,
@@ -1106,7 +1112,6 @@ a:focus {
 .testimonial .owl-dot.active {
     background: #00539C;
 }
-
 
 /*******************************/
 /*********** Blog CSS **********/
