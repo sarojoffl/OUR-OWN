@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .models import Project, Service, Feature, About, FAQ, Testimonial, BlogPost, Booking
+from .models import Project, Service, Feature, About, FAQ, Testimonial, BlogPost, Booking, CarouselItem
 from .forms import BookingForm, ContactForm, TestimonialForm
 from django.contrib import messages
 from django.shortcuts import get_object_or_404
@@ -11,6 +11,7 @@ def index(request):
     faqs = FAQ.objects.all()
     testimonials = Testimonial.objects.all()
     blogs = BlogPost.objects.all().order_by('-publish_date')[:3]
+    carousel_items = CarouselItem.objects.all()
 
     return render(request, 'core/index.html', {
         'about': about,
@@ -18,7 +19,8 @@ def index(request):
         'features': features,
         'faqs': faqs,
         'testimonials': testimonials,
-        'blogs': blogs
+        'blogs': blogs,
+        'carousel_items': carousel_items,
     })
 
 def about(request):

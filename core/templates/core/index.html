@@ -6,51 +6,23 @@
 
 {% block content %}
 <!-- Carousel Start -->
-<div class="header-carousel owl-carousel">
-    <!-- Hospitality Slide -->
+<div class="header-carousel owl-carousel" id="carousel-container">
+    {% for item in carousel_items %}
     <div class="header-carousel-item">
-        <div class="header-carousel-item-img-1">
-            <img src="{% static 'img/hospitality.jpg' %}" class="img-fluid w-100" alt="Hospitality">
-        </div>
-        <div class="carousel-caption">
-            <div class="carousel-caption-inner text-start p-3">
-                <h1 class="display-1 text-capitalize text-white mb-4">Premium Hospitality Services</h1>
-                <p class="mb-5 fs-5">Delivering exceptional experiences and guest satisfaction with top-tier hospitality solutions.</p>
-                <a class="btn btn-primary rounded-pill py-3 px-5 mb-4 me-4" href="{% url 'services' %}">Learn More</a>
-                <a class="btn btn-dark rounded-pill py-3 px-5 mb-4" href="{% url 'contact' %}">Contact Us</a>
-            </div>
-        </div>
-    </div>
-
-    <!-- Construction Slide -->
-    <div class="header-carousel-item mx-auto">
-        <div class="header-carousel-item-img-2">
-            <img src="{% static 'img/construction.jpg' %}" class="img-fluid w-100" alt="Construction">
+        <div class="header-carousel-item-img">
+            <img src="{{ item.image.url }}" class="img-fluid w-100" alt="{{ item.title }}">
         </div>
         <div class="carousel-caption">
             <div class="carousel-caption-inner text-center p-3">
-                <h1 class="display-1 text-capitalize text-white mb-4">Reliable Construction Services</h1>
-                <p class="mb-5 fs-5">From foundation to finish, we build with quality, safety, and excellence in every project.</p>
-                <a class="btn btn-primary rounded-pill py-3 px-5 mb-4 me-4" href="{% url 'services' %}">Learn More</a>
+                <h1 class="display-1 text-capitalize text-white mb-4">{{ item.title }}</h1>
+                <p class="mb-5 fs-5">{{ item.description }}</p>
+                <!-- Static URLs for Learn More and Contact Us -->
+                <a class="btn btn-red rounded-pill py-3 px-5 mb-4 me-4" href="{% url 'services' %}">Learn More</a>
                 <a class="btn btn-dark rounded-pill py-3 px-5 mb-4" href="{% url 'contact' %}">Contact Us</a>
             </div>
         </div>
     </div>
-
-    <!-- Cleaning Slide -->
-    <div class="header-carousel-item">
-        <div class="header-carousel-item-img-3">
-            <img src="{% static 'img/cleaning.jpg' %}" class="img-fluid w-100" alt="Cleaning">
-        </div>
-        <div class="carousel-caption">
-            <div class="carousel-caption-inner text-end p-3">
-                <h1 class="display-1 text-capitalize text-white mb-4">Trusted Cleaning Services</h1>
-                <p class="mb-5 fs-5">Professional cleaning for homes, offices, and businesses with over a decade of expertise.</p>
-                <a class="btn btn-primary rounded-pill py-3 px-5 mb-4 me-4" href="{% url 'services' %}">Learn More</a>
-                <a class="btn btn-dark rounded-pill py-3 px-5 mb-4" href="{% url 'contact' %}">Contact Us</a>
-            </div>
-        </div>
-    </div>
+    {% endfor %}
 </div>
 <!-- Carousel End -->
 
