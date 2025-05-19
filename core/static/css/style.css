@@ -2022,6 +2022,13 @@ a:focus {
     z-index: 9;
 }
 
+.carousel-img {
+    width: 100%;
+    height: 80vh; 
+    object-fit: cover;
+    object-position: center;
+}
+
 @media (max-width: 992px) {
     .header-carousel .header-carousel-item .carousel-caption {
         width: 100% !important;

@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .models import Project, Service, Feature, About, FAQ, Testimonial, BlogPost, Booking, CarouselItem
+from .models import Service, Feature, About, FAQ, Testimonial, BlogPost, Booking, CarouselItem
 from .forms import BookingForm, ContactForm, TestimonialForm
 from django.contrib import messages
 from django.shortcuts import get_object_or_404
@@ -42,10 +42,6 @@ def services_detail(request, slug):
     return render(request, 'core/service_detail.html', {
         'services': services
     })
-
-def projects(request):
-    projects = Project.objects.all()
-    return render(request, 'core/portfolio.html', {'projects': projects})
 
 def contact(request):
     if request.method == "POST":
