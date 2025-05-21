@@ -33,7 +33,7 @@
             {% for blog in blogs %}
             <div class="col-lg-4 col-md-6 mb-4">
                 <div class="blog-item w-100 h-100 d-flex flex-column justify-content-between">
-                    <img src="{{ blog.image.url }}" alt="{{ blog.title }}" class="img-fluid rounded">
+                    <img src="{{ blog.image.url }}" alt="{{ blog.title }}" class="card-img-top fixed-img">
                     <h3>{{ blog.title }}</h3>
                     <div class="meta mb-2">
                         <i class="fa fa-user"></i> {{ blog.author }} &nbsp;|&nbsp;
